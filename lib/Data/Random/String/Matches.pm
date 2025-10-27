@@ -167,13 +167,22 @@ sub _generate_from_ast {
     my ($node, $target_length) = @_;
 
     if ($node->{type} eq 'seq') {
-        my $out = '';
+	        my $out = '';
         for my $pair (@{ $node->{items} }) {
             my ($atom, $quant) = @$pair;
+
+            # How many times to repeat this atom
             my $count = _quant_to_count($quant);
+
+            # Repeat atom exactly count times
             for (1 .. $count) {
-                $out .= _generate_from_ast($atom, $target_length);
+                if ($atom->{type} eq 'lit') {
+                    $out .= $atom->{value};
+                }
+                else {
+                    $out .= _generate_from_ast($atom, $target_length);
                 last if defined $target_length && length($out) >= $target_length;
+                }
             }
         }
         return $out;
