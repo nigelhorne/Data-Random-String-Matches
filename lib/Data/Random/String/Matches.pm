@@ -2,238 +2,257 @@ package Data::Random::String::Matches;
 
 use strict;
 use warnings;
-
-our $VERSION = '0.02';
 use Exporter 'import';
-our @EXPORT_OK = qw(random_match);
+our @EXPORT_OK = ('generate_match');
+
+our $VERSION = '0.04';
 
 =head1 NAME
 
-Data::Random::String::Matches - Generate random strings that match a Perl regex
+Data::Random::String::Matches - Generate random strings that match a regex
 
 =head1 SYNOPSIS
 
-  use Data::Random::String::Matches qw(random_match);
+  use Data::Random::String::Matches 'generate_match';
 
-  my $regex = qr/^(foo|bar)[A-Z]{2,3}\d+[a-z]?$/;
-  my $str   = random_match($regex, 10);
-
-  print "$str\n";  # e.g. "barXZ42a"
-
-  # Or use the OO interface:
-  my $gen = Data::Random::String::Matches->new(qr/^[A-Z]{3}\d{2}$/);
-  print $gen->next, "\n";
+  my $str = generate_match(qr/^[A-Z]{2}\d{3}[a-z]+$/);
+  print "$str\n";  # e.g. "XZ483bcz"
 
 =head1 DESCRIPTION
 
-C<Data::Random::String::Matches> generates random strings that match a given
-Perl-compatible regular expression. It supports basic regex features including
-character classes, escapes, quantifiers, alternation, and grouping.
-
-This can be useful for testing, fuzzing, or generating synthetic datasets.
-
-=head1 FUNCTIONS
-
-=head2 random_match( $regex [, $target_length ] )
-
-Returns a random string that matches the given regex. Optionally aims for the
-given length.
+This module generates random strings that match a given Perl regular expression.
+It supports literals, character classes (including escaped chars), quantifiers,
+grouping, alternation, and common escapes like C<\d>, C<\w>, C<\s>, and C<.>.
 
 =cut
 
-# -------------------------------------------------------------------------
-# Functional interface
-# -------------------------------------------------------------------------
-
-sub random_match {
+sub generate_match {
     my ($regex, $target_length) = @_;
-    my $self = __PACKAGE__->new($regex);
-    return $self->generate($target_length);
-}
 
-# -------------------------------------------------------------------------
-# Object-oriented interface
-# -------------------------------------------------------------------------
+    my $re_str = "$regex";
+    $re_str =~ s/^\(\?\^[^:]*://;   # remove (?^: prefix from qr// stringification
+    $re_str =~ s/\)$//;             # remove closing )
 
-sub new {
-    my ($class, $regex) = @_;
-    die "Regex required" unless defined $regex;
+    # Strip anchors (^, $)
+    $re_str =~ s/^\^//;
+    $re_str =~ s/\$$//;
 
-    my $self = bless {}, $class;
-    $regex =~ s/^\^//;  # ignore anchors
-    $regex =~ s/\$$//;
-    $self->{regex}   = $regex;
-    $self->{pattern} = _parse_regex($regex);
-    return $self;
-}
+    my $ast = _parse_regex($re_str);
+    my $result = _generate_from_ast($ast, $target_length);
 
-sub regex { shift->{regex} }
+    # Safely compile the regex
+    my $compiled = eval { qr/$re_str/ };
+    die "Invalid regex: $re_str ($@)" if $@ || !$compiled;
 
-sub next    { shift->generate(@_) }
-sub generate {
-    my ($self, $target_length) = @_;
-    my $regex   = $self->{regex};
-    my $pattern = $self->{pattern};
-
-    my $str = _generate_from_ast($pattern, $target_length);
-
-    if (defined $target_length) {
-        $str = substr($str, 0, $target_length);
-        for (1..1000) {
-            return $str if $str =~ /^$regex$/;
-            $str = _generate_from_ast($pattern, $target_length);
-            $str = substr($str, 0, $target_length);
-        }
-        die "Could not generate a valid string of length $target_length for $regex\n";
+    for (1..500) {
+        return $result if $result =~ $compiled;
+        $result = _generate_from_ast($ast, $target_length);
     }
-
-    return $str;
+    die "Could not generate valid string for regex: $re_str\n";
 }
 
-# -------------------------------------------------------------------------
-# Internal: parser builds a simple AST
-# -------------------------------------------------------------------------
-
+# --- Recursive descent parser ---
 sub _parse_regex {
     my ($regex) = @_;
-    my @stack = [[]];
-    my $group = $stack[-1];
-
-    while (length $regex) {
-        if ($regex =~ s/^\((?!\?)(.*?)\)//s) {
-            push @$group, _parse_regex($1);
-        }
-        elsif ($regex =~ s/^\|//) {
-            push @stack, [];
-            $group = $stack[-1];
-        }
-        elsif ($regex =~ s/^(\[.*?\]|\\?.|\.)//s) {
-            my $atom = $1;
-            if ($regex =~ s/^(\{[0-9]+(?:,[0-9]+)?\}|[+*?])//) {
-                push @$group, [$atom, $1];
-            } else {
-                push @$group, [$atom, ''];
-            }
-        }
-        else {
-            last;
-        }
-    }
-
-    return @stack > 1 ? { alt => [ @stack ] } : { seq => $stack[0] };
+    my @tokens = _tokenize($regex);
+    return _parse_alternation(\@tokens);
 }
 
-# -------------------------------------------------------------------------
-# Internal: generator walks AST recursively
-# -------------------------------------------------------------------------
+sub _parse_alternation {
+    my ($tokens) = @_;
+    my @branches;
 
+    push @branches, _parse_sequence($tokens);
+    while (@$tokens && $tokens->[0] eq '|') {
+        shift @$tokens;
+        push @branches, _parse_sequence($tokens);
+    }
+
+    return @branches > 1 ? { type => 'alt', branches => \@branches } : $branches[0];
+}
+
+sub _parse_sequence {
+    my ($tokens) = @_;
+    my @group;
+
+    while (@$tokens && $tokens->[0] ne ')' && $tokens->[0] ne '|') {
+        my $atom = _parse_atom($tokens);
+        my $quant = '';
+        if (@$tokens && $tokens->[0] =~ /^(?:[*+?]|\{\d+(?:,\d+)?\})$/) {
+            $quant = shift @$tokens;
+        }
+        push @group, [$atom, $quant];
+    }
+
+    return { type => 'seq', items => \@group };
+}
+
+sub _parse_atom {
+    my ($tokens) = @_;
+    my $t = shift @$tokens // '';
+    return _parse_group($tokens) if $t eq '(';
+    return { type => 'charclass', chars => _parse_charclass($1) } if $t =~ /^\[(.*?)\]$/;
+    return { type => 'escape', value => $t } if $t =~ /^\\/;
+    return { type => 'dot' } if $t eq '.';
+    return { type => 'lit', value => $t };
+}
+
+sub _parse_group {
+    my ($tokens) = @_;
+    my $node = _parse_alternation($tokens);
+    shift @$tokens if @$tokens && $tokens->[0] eq ')';
+    return { type => 'group', inner => $node };
+}
+
+# --- Tokenizer ---
+sub _tokenize {
+    my ($regex) = @_;
+    my @tokens;
+
+    while ($regex =~ /
+        (\\[dws])            | # common escapes
+        (\\.)                | # any escaped char
+        (\[[^\]]+\])         | # character class
+        (\{[0-9]+(?:,[0-9]+)?\}) | # quantifier
+        ([*+?()|.])          | # operators
+        ([^\[\]\\*+?()|{}]+)   # literal run
+    /xg) {
+        push @tokens, grep { defined && length } ($1, $2, $3, $4, $5, $6);
+    }
+
+    return @tokens;
+}
+
+# --- Character class parser (with escaped chars and ranges) ---
+sub _parse_charclass {
+    my ($inside) = @_;
+    my @chars;
+    my @tokens;
+
+    my $negated = ($inside =~ s/^\^//);
+
+    while ($inside =~ /(\\.|-|(?!\\).)/g) {
+        push @tokens, $1;
+    }
+
+    for (my $i = 0; $i < @tokens; $i++) {
+        my $c = $tokens[$i];
+
+        if ($c eq '-' && @chars) {
+            my $start = $chars[-1];
+            my $end   = $tokens[$i+1];
+            next unless defined $end;
+            $end =~ s/^\\// if $end =~ /^\\/;
+            pop @chars;
+            push @chars, ($start .. $end);
+            $i++;
+            next;
+        }
+
+        $c =~ s/^\\// if $c =~ /^\\/;
+        push @chars, $c;
+    }
+
+    if ($negated) {
+        my @all = ('a'..'z', 'A'..'Z', 0..9, '_', '-', ' ');
+        my %set = map { $_ => 1 } @chars;
+        @chars = grep { !$set{$_} } @all;
+    }
+
+    return \@chars;
+}
+
+# --- Generation phase ---
 sub _generate_from_ast {
     my ($node, $target_length) = @_;
 
-    if (exists $node->{alt}) {
-        my $choice = $node->{alt}[ rand @{ $node->{alt} } ];
-        return join '', map { _generate_from_atom(@$_) } @$choice;
-    }
-    elsif (exists $node->{seq}) {
-        my $str = '';
-        for my $part (@{ $node->{seq} }) {
-            if (ref($part->[0]) eq 'HASH') {
-                $str .= _generate_from_ast($part->[0], $target_length);
-            } else {
-                $str .= _generate_from_atom(@$part);
+    if ($node->{type} eq 'seq') {
+        my $out = '';
+        for my $pair (@{ $node->{items} }) {
+            my ($atom, $quant) = @$pair;
+            my $count = _quant_to_count($quant);
+            for (1 .. $count) {
+                $out .= _generate_from_ast($atom, $target_length);
+                last if defined $target_length && length($out) >= $target_length;
             }
         }
-        return $str;
+        return $out;
     }
+
+    if ($node->{type} eq 'alt') {
+        my $branch = $node->{branches}[ rand @{ $node->{branches} } ];
+        return _generate_from_ast($branch, $target_length);
+    }
+
+    if ($node->{type} eq 'group') {
+        return _generate_from_ast($node->{inner}, $target_length);
+    }
+
+    if ($node->{type} eq 'lit') {
+        return $node->{value};
+    }
+
+    if ($node->{type} eq 'dot') {
+        return ('a'..'z', 'A'..'Z', 0..9, '_')[rand 63];
+    }
+
+    if ($node->{type} eq 'escape') {
+        return _generate_escape($node->{value});
+    }
+
+    if ($node->{type} eq 'charclass') {
+        return $node->{chars}[ rand @{ $node->{chars} } ];
+    }
+
     return '';
 }
 
-# -------------------------------------------------------------------------
-# Internal: quantifier expansion
-# -------------------------------------------------------------------------
-
+# --- Quantifier interpretation ---
 sub _quant_to_count {
     my ($quant) = @_;
-    return 1 unless $quant;
-    return int(rand(2)) if $quant eq '?';
-    return int(rand(5)) if $quant eq '*';
-    return 1 + int(rand(4)) if $quant eq '+';
+    return 1 unless defined $quant && length $quant;
+
+    if ($quant eq '?') {
+        return int(rand(2));           # 0 or 1
+    }
+    if ($quant eq '*') {
+        return int(rand(11));          # 0..10
+    }
+    if ($quant eq '+') {
+        return 1 + int(rand(10));     # 1..10
+    }
+
     if ($quant =~ /^\{(\d+)(?:,(\d+))?\}$/) {
-        my ($min, $max) = ($1, defined $2 ? $2 : $1);
-        $max = $min + 4 if $max < $min;
+        my ($min, $max) = ($1, $2 // $1);
+        $max = $min if $max < $min;
         return $min + int(rand($max - $min + 1));
     }
+
     return 1;
 }
 
-# -------------------------------------------------------------------------
-# Internal: atom expansion
-# -------------------------------------------------------------------------
 
-sub _generate_from_atom {
-    my ($atom, $quant) = @_;
-    my $repeat = _quant_to_count($quant);
-    my $out = '';
-
-    for (1 .. $repeat) {
-        if ($atom =~ /^\[([^\]]+)\]$/) {
-            my @set;
-            my $inside = $1;
-            while ($inside =~ /(.)(?:-(.))?/g) {
-                if (defined $2) { push @set, ($1 .. $2) }
-                else { push @set, $1 }
-            }
-            $out .= $set[rand @set];
-        }
-        elsif ($atom eq '\\d') { $out .= int(rand(10)) }
-        elsif ($atom eq '\\w') { $out .= (('a'..'z','A'..'Z',0..9,'_')[rand 63]) }
-        elsif ($atom eq '\\s') { $out .= (' ', "\t")[rand 2] }
-        elsif ($atom eq '.')   { $out .= ('a'..'z')[rand 26] }
-        else {
-            $atom =~ s/^\\//;
-            $out .= $atom;
-        }
-    }
-    return $out;
+sub _generate_escape {
+    my ($esc) = @_;
+    return int(rand(10)) if $esc eq '\\d';
+    return ('a'..'z', 'A'..'Z', 0..9, '_')[rand 63] if $esc eq '\\w';
+    return (' ', "\t")[rand 2] if $esc eq '\\s';
+    $esc =~ s/^\\//;
+    return $esc;
 }
 
 1;
 
 __END__
 
-=head1 OO INTERFACE
-
-=head2 new( $regex )
-
-Creates a new generator object.
-
-=head2 next
-
-Alias for C<generate>.
-
-=head2 generate( [ $target_length ] )
-
-Generates a random string that matches the stored regex.
-
-=head2 regex
-
-Returns the regex used for generation.
-
-=head1 LIMITATIONS
-
-This module supports a practical subset of Perl regex syntax:
-basic literals, character classes, escapes, quantifiers, groups,
-and alternation. It does not yet support lookahead, backreferences,
-or nested alternation.
-
 =head1 AUTHOR
 
-Nigel Horne, C<< <nhorne at cpan.org> >>
+Nigel Horne
 
 =head1 LICENSE
 
-This module is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
+This module is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
 
 =cut
 
