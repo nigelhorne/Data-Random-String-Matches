@@ -13,7 +13,7 @@ Run this script to see examples of various patterns:
 Or use individual patterns in your own code:
 
     use Data::Random::String::Matches;
-    
+
     # Pick any pattern from above
     my $gen = Data::Random::String::Matches->new(qr/[A-Z]{3}\d{4}/);
     my $result = $gen->generate();

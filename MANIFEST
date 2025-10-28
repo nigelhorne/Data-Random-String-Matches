@@ -16,5 +16,6 @@ t/cli.t
 t/eof.t
 t/eol.t
 t/generate.t
+t/pod-cm.t
 t/pod-synopsis.t
 t/pod.t

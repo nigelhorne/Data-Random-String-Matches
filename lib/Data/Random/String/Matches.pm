@@ -723,23 +723,24 @@ sub _unicode_property_chars {
 
 	# Common Unicode properties
 	if ($prop eq 'L' || $prop eq 'Letter') {
-		# Letters
-		return ('a' .. 'z', 'A' .. 'Z', map { chr($_) } (ord('À') .. ord('ÿ')));
+		# Letters, skip × and ÷ which are symbols
+		return ('a' .. 'z', 'A' .. 'Z', map { chr($_) } ((ord'À')..ord('Ö'), ord('Ø')..ord('ö'), ord('ø')..ord('ÿ')));
 	} elsif ($prop eq 'N' || $prop eq 'Number') {
 		# Numbers
-		return ('0' .. '9', map { chr($_) } (ord('①').. ord('⑳')));
+		# return ('0' .. '9', map { chr($_) } (ord('①').. ord('⑳')));
+		return ('0' .. '9');
 	} elsif ($prop eq 'Lu' || $prop eq 'Uppercase_Letter') {
-		# Uppercase letters
-		return ('A' .. 'Z', map { chr($_) } (ord('À') .. ord('Þ')));
+		# Uppercase letters, skip × which is not a letter
+		return ('A' .. 'Z', map { chr($_) } (ord('À') .. ord('Ö'), ord('ø') .. ord('Þ')));
 	} elsif ($prop eq 'Ll' || $prop eq 'Lowercase_Letter') {
-		# Lowercase letters
-		return ('a' .. 'z', map { chr($_) } (ord('à') .. ord('ÿ')));
+		# Lowercase letters, skip ÷ which is not a letter
+		return ('a' .. 'z', map { chr($_) } (ord('à') .. ord('ö'), ord('ø') .. ord('ÿ')));
 	} elsif ($prop eq 'P' || $prop eq 'Punctuation') {
 		# Punctuation
 		return ('.', ',', '!', '?', ';', ':', '-', '—', '…');
 	} elsif ($prop eq 'S' || $prop eq 'Symbol') {
 		# Symbols
-		return ('$', '€', '£', '¥', '©', '®', '™', '°', '±');
+		return ('$', '€', '£', '¥', '©', '®', '™', '°', '±', '×', '÷');
 	} elsif ($prop eq 'Z' || $prop eq 'Separator') {
 		# Separators
 		return (' ', "\t", "\n");
