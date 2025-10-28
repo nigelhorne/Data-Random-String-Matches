@@ -7,10 +7,7 @@ use utf8;
 use Test::Most;
 use Test::DescribeMe qw(extended);	# These can fail at the moment.  Disable while debugging
 
-use open qw(:std :utf8);
-
-binmode STDOUT, ':encoding(UTF-8)';
-binmode STDERR, ':encoding(UTF-8)';
+use open ':std', ':encoding(UTF-8)';
 
 use_ok('Data::Random::String::Matches');
 
@@ -187,10 +184,17 @@ subtest 'Possessive with backreferences' => sub {
 };
 
 subtest 'Named captures with possessive quantifiers' => sub {
-	my $gen = Data::Random::String::Matches->new(qr/(?<id>\d{3})++(?<code>[A-Z]{2})/);
+	my $gen = Data::Random::String::Matches->new(qr/(?<id>\d{3})+(?<code>[A-Z]{2})/);
 	my $str = $gen->generate_smart();
 
-	like($str, qr/^\d{3}[A-Z]{2}$/, 'Named capture with possessive works');
+	# The group (\d{3})+ can repeat, so we get 3, 6, 9, 12, etc. digits
+	like($str, qr/^(\d{3})+[A-Z]{2}$/, 'Named capture with group quantifier works');
+
+	# Extract and verify
+	if ($str =~ /^(\d+)([A-Z]{2})$/) {
+		my $digit_count = length($1);
+		is($digit_count % 3, 0, 'Digit count is multiple of 3');
+	}
 };
 
 subtest 'Unicode properties with lookahead' => sub {

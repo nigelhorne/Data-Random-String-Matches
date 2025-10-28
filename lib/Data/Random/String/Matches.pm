@@ -697,7 +697,7 @@ sub _random_from_class {
 			# Range
 			my $end = substr($class, $i+2, 1);
 			push @chars, ($char .. $end);
-			$i += 2;
+			$i += 2;	# Will be incremented again by loop, total +3
 		} else {
 			push @chars, $char;
 		}

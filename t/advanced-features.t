@@ -3,6 +3,8 @@
 use strict;
 use warnings;
 
+use open ':std', ':encoding(UTF-8)';
+
 use Test::DescribeMe qw(extended);	# These can fail at the moment.  Disable while debugging
 use Test::Most;
 
