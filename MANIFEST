@@ -10,8 +10,11 @@ MANIFEST.SKIP
 README.md
 t/30-basics.t
 t/40-advanced.t
+t/advanced-features.t
+t/advanced_regex.t
 t/cli.t
 t/eof.t
 t/eol.t
 t/generate.t
+t/pod-synopsis.t
 t/pod.t

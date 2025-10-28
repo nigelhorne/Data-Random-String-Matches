@@ -28,6 +28,7 @@ WriteMakefile(
 	},
 	EXE_FILES => ['bin/random-string', 'bin/cookbook'],
 	TEST_REQUIRES => {
+		'File::Temp' => 0,
 		'IPC::Run3' => 0,
 		'Test::Compile' => 0,
 		'Test::DescribeMe' => 0,
