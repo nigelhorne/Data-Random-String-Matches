@@ -35,6 +35,9 @@ Data::Random::String::Matches - Generate random strings matching a regex
     my $gen4 = Data::Random::String::Matches->new(qr/(ha){2,4}/);
     my $laugh = $gen4->generate_smart();  # "haha", "hahaha", or "hahahaha"
 
+    # Consistency with Legacy software
+    print Data::Random::String::Matches->create_random_string(length => 3, regex => '\d{3}'), "\n";
+
 =head1 DESCRIPTION
 
 This module generates random strings that match a given regular expression pattern.
@@ -161,7 +164,7 @@ C<$length> is optional and defaults to 10 (used for fallback generation).
 sub new {
 	my ($class, $regex, $length) = @_;
 
-	croak "Regex pattern is required" unless defined $regex;
+	croak 'Regex pattern is required' unless defined $regex;
 
 	# Convert string to regex if needed
 	my $regex_obj = ref($regex) eq 'Regexp' ? $regex : qr/$regex/;
@@ -199,7 +202,7 @@ sub generate {
 
 	# If smart approach failed, show warning in debug mode
 	if ($ENV{DEBUG_REGEX_GEN} && $@) {
-		warn "Smart generation failed: $@\n";
+		warn "Smart generation failed: $@";
 	}
 
 	# Fall back to brute force with character set matching
@@ -335,7 +338,7 @@ sub _parse_sequence {
 		} elsif ($char eq '[') {
 			# Character class
 			my $end = $self->_find_matching_bracket($pattern, $i);
-			croak "Unmatched [" if $end == -1;
+			croak 'Unmatched [' if $end == -1;
 
 			my $class = substr($pattern, $i+1, $end-$i-1);
 			my ($generated, $new_i) = $self->_handle_quantifier($pattern, $end, sub {
@@ -346,7 +349,7 @@ sub _parse_sequence {
 		} elsif ($char eq '(') {
 			# Group
 			my $end = $self->_find_matching_paren($pattern, $i);
-			croak "Unmatched (" if $end == -1;
+			croak 'Unmatched (' if $end == -1;
 
 			my $group_content = substr($pattern, $i+1, $end-$i-1);
 
@@ -565,7 +568,7 @@ sub _random_from_class {
 
 For consistency with L<Data::Random::String>.
 
-  print Data::Random::String->create_random_string(length => 3, regex => '\d{3}'), "\n";
+  print Data::Random::String::Matches->create_random_string(length => 3, regex => '\d{3}'), "\n";
 
 =cut
 

@@ -94,7 +94,7 @@ subtest 'Max attempts parameter' => sub {
 
 	# Temporarily break smart parser by making it return wrong result
 	no warnings 'redefine';
-	local *Data::Random::String::Matches::_build_from_pattern = sub { return "WRONG" };
+	local *Data::Random::String::Matches::_build_from_pattern = sub { return 'WRONG' };
 
 	throws_ok {
 		$gen->generate(10)

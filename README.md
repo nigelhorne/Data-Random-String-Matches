@@ -25,6 +25,9 @@ Data::Random::String::Matches - Generate random strings matching a regex
     my $gen4 = Data::Random::String::Matches->new(qr/(ha){2,4}/);
     my $laugh = $gen4->generate_smart();  # "haha", "hahaha", or "hahahaha"
 
+    # Consistency with Legacy software
+    print Data::Random::String::Matches->create_random_string(length => 3, regex => '\d{3}'), "\n";
+
 # DESCRIPTION
 
 This module generates random strings that match a given regular expression pattern.
@@ -115,7 +118,7 @@ than brute force, but may not handle all edge cases.
 
 For consistency with [Data::Random::String](https://metacpan.org/pod/Data%3A%3ARandom%3A%3AString).
 
-    print Data::Random::String->create_random_string(length => 3, regex => '\d{3}'), "\n";
+    print Data::Random::String::Matches->create_random_string(length => 3, regex => '\d{3}'), "\n";
 
 # AUTHOR
 
