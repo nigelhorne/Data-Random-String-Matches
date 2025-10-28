@@ -81,25 +81,32 @@ subtest 'Multiple generation' => sub {
 subtest 'String pattern conversion' => sub {
 	my $gen = Data::Random::String::Matches->new('[0-9]{4}', 4);
 	my $str = $gen->generate();
-	
+
 	like($str, qr/^[0-9]{4}$/, 'string pattern is converted to regex');
 };
 
 # Test max_attempts parameter
 subtest 'Max attempts parameter' => sub {
-	my $gen = Data::Random::String::Matches->new(qr/IMPOSSIBLE_MATCH_9999999/, 5);
-	
+	# Use a very long literal string that's unlikely to be randomly generated
+	# and make the length too short, so smart parser will generate wrong length
+	my $long_string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	my $gen = Data::Random::String::Matches->new(qr/^$long_string$/, 5);
+
+	# Temporarily break smart parser by making it return wrong result
+	no warnings 'redefine';
+	local *Data::Random::String::Matches::_build_from_pattern = sub { return "WRONG" };
+
 	throws_ok {
 		$gen->generate(10)
 	} qr/Failed to generate matching string/, 
-	'dies after max attempts for impossible pattern';
+	  'dies after max attempts when smart parser returns non-matching string';
 };
 
 # Test with complex patterns
 subtest 'Complex patterns' => sub {
 	my $gen = Data::Random::String::Matches->new(qr/[A-Z][a-z]{2}\d{2}/, 5);
 	my $str = $gen->generate();
-	
+
 	like($str, qr/^[A-Z][a-z]{2}\d{2}$/, 
 		 'matches complex pattern with different character classes');
 	is(length($str), 5, 'complex pattern generates correct length');
@@ -109,10 +116,10 @@ subtest 'Complex patterns' => sub {
 subtest 'Edge cases' => sub {
 	my $gen = Data::Random::String::Matches->new(qr/[A-Z]/, 1);
 	my $str = $gen->generate();
-	
+
 	like($str, qr/^[A-Z]$/, 'handles single character pattern');
 	is(length($str), 1, 'single character has length 1');
-	
+
 	my $gen2 = Data::Random::String::Matches->new(qr/ABC/, 3);
 	my $str2 = $gen2->generate();
 	is($str2, 'ABC', 'handles literal string pattern');
@@ -121,10 +128,34 @@ subtest 'Edge cases' => sub {
 # Test generate_smart method (if available)
 subtest 'generate_smart method' => sub {
 	my $gen = Data::Random::String::Matches->new(qr/\d{3}/, 3);
-	
+
 	lives_ok {
 		my $str = $gen->generate_smart();
 	} 'generate_smart() executes without errors';
+};
+
+# Test fixed length complex pattern
+subtest 'fixed length' => sub {
+	my $gen = Data::Random::String::Matches->new(qr/^AIza[0-9A-Za-z_-]{35}$/);
+	lives_ok {
+		my $str = $gen->generate_smart();
+		like($str, qr/^AIza[0-9A-Za-z_-]{35}$/, 'Complex API key generation works');
+		is(length($str), 39, 'Generated string has correct length');
+	} 'generate_smart() executes without errors for complex pattern';
+};
+
+# Test alternation patterns
+subtest 'Alternation patterns' => sub {
+	my $gen = Data::Random::String::Matches->new(qr/(cat|dog|bird)/);
+	my $str = $gen->generate_smart();
+	ok(defined $str, 'Alternation pattern generates something');
+};
+
+# Test optional elements
+subtest 'Optional elements' => sub {
+	my $gen = Data::Random::String::Matches->new(qr/colou?r/);
+	my $str = $gen->generate_smart();
+	like($str, qr/^colou?r$/, 'Optional character pattern works');
 };
 
 # Test randomness
@@ -139,16 +170,6 @@ subtest 'Randomness check' => sub {
 
 	# Should see multiple different digits
 	cmp_ok(scalar keys %seen, '>=', 3, 'generates reasonably random distribution');
-};
-
-subtest 'fixed length' => sub {
-	my $gen = Data::Random::String::Matches->new(qr/^AIza[0-9A-Za-z_-]{35}$/);
-
-	lives_ok {
-		my $str = $gen->generate_smart();
-	diag($str);
-	like($str, qr/^AIza[0-9A-Za-z_-]{35}$/, 'Complex API generation works');
-	} 'generate_smart() executes without errors';
 };
 
 done_testing();
