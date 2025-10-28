@@ -1,5 +1,6 @@
 bin/random-string
 Changes
+doc/cookbook.md
 lib/Data/Random/String/Matches.pm
 LICENSE
 Makefile.PL
