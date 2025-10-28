@@ -523,11 +523,10 @@ sub _parse_sequence {
 
 sub _handle_quantifier {
 	my ($self, $pattern, $pos, $generator, $check_possessive) = @_;
+	$check_possessive //= 1;  # Default to checking for possessive
 
 	my $next = substr($pattern, $pos + 1, 1);
 	my $is_possessive = 0;
-
-	$check_possessive //= 1;
 
 	# Check for possessive quantifier (+)
 	if ($check_possessive && $pos + 2 < length($pattern)) {
@@ -538,7 +537,7 @@ sub _handle_quantifier {
 	}
 
 	if ($next eq '{') {
-		my $end = index($pattern, '}', $pos + 1);
+		my $end = index($pattern, '}', $pos + 2);
 		croak "Unmatched '}'" if ($end == -1);
 		my $quant = substr($pattern, $pos + 2, $end - $pos - 2);
 
