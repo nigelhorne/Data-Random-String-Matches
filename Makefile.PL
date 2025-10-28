@@ -26,7 +26,7 @@ WriteMakefile(
 	CONFIGURE_REQUIRES => {
 		'ExtUtils::MakeMaker' => 6.64,	# Minimum version for TEST_REQUIRES
 	},
-	EXE_FILES => ['bin/random-string'],
+	EXE_FILES => ['bin/random-string', 'bin/cookbook'],
 	TEST_REQUIRES => {
 		'IPC::Run3' => 0,
 		'Test::Compile' => 0,
