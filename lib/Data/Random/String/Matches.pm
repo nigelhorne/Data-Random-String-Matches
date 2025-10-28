@@ -561,9 +561,11 @@ sub _random_from_class {
 	return @chars ? $chars[int(rand(@chars))] : 'X';
 }
 
-=head1 create_random_string
+=head2 create_random_string
 
 For consistency with L<Data::Random::String>.
+
+  print Data::Random::String->create_random_string(length => 3, regex => '\d{3}'), "\n";
 
 =cut
 

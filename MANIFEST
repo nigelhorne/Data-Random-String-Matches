@@ -8,3 +8,4 @@ t/40-advanced.t
 t/eof.t
 t/eol.t
 t/generate.t
+t/pod.t
