@@ -573,6 +573,7 @@ sub create_random_string
 {
 	my $class = shift;
 	my $params = Params::Get::get_params(undef, @_);
+
 	my $regex = $params->{'regex'};
 	my $length = $params->{'length'};
 

@@ -25,7 +25,9 @@ WriteMakefile(
 	PL_FILES	=> {},
 	CONFIGURE_REQUIRES => {
 		'ExtUtils::MakeMaker' => 6.64,	# Minimum version for TEST_REQUIRES
-	}, TEST_REQUIRES => {
+	},
+	EXE_FILES => ['bin/random-string'],
+	TEST_REQUIRES => {
 		'Test::Compile' => 0,
 		'Test::DescribeMe' => 0,
 		'Test::Most' => 0,
