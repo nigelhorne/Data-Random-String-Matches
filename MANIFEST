@@ -1,0 +1,10 @@
+lib/Data/Random/String/Matches.pm
+LICENSE
+Makefile.PL
+MANIFEST			This list of files
+README.md
+t/30-basics.t
+t/40-advanced.t
+t/eof.t
+t/eol.t
+t/generate.t

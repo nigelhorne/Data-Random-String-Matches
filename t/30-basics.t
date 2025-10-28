@@ -14,8 +14,8 @@ subtest 'Constructor tests' => sub {
 	my $gen2 = Data::Random::String::Matches->new('test', 15);
 	is($gen2->{length}, 15, 'length parameter is set correctly');
 
-	throws_ok { 
-		Data::Random::String::Matches->new() 
+	throws_ok {
+		Data::Random::String::Matches->new()
 	} qr/Regex pattern is required/, 'dies without regex parameter';
 };
 
@@ -98,7 +98,7 @@ subtest 'Max attempts parameter' => sub {
 
 	throws_ok {
 		$gen->generate(10)
-	} qr/Failed to generate matching string/, 
+	} qr/Failed to generate matching string/,
 	  'dies after max attempts when smart parser returns non-matching string';
 };
 
@@ -107,7 +107,7 @@ subtest 'Complex patterns' => sub {
 	my $gen = Data::Random::String::Matches->new(qr/[A-Z][a-z]{2}\d{2}/, 5);
 	my $str = $gen->generate();
 
-	like($str, qr/^[A-Z][a-z]{2}\d{2}$/, 
+	like($str, qr/^[A-Z][a-z]{2}\d{2}$/,
 		 'matches complex pattern with different character classes');
 	is(length($str), 5, 'complex pattern generates correct length');
 };
