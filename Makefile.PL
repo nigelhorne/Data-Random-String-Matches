@@ -28,6 +28,7 @@ WriteMakefile(
 	},
 	EXE_FILES => ['bin/random-string'],
 	TEST_REQUIRES => {
+		'IPC::Run3' => 0,
 		'Test::Compile' => 0,
 		'Test::DescribeMe' => 0,
 		'Test::Most' => 0,
