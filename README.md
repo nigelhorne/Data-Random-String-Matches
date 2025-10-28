@@ -12,15 +12,15 @@ Data::Random::String::Matches - Generate random strings matching a regex
     # Generate a matching string
     my $str = $gen->generate();
     print $str;  # e.g., "XYZ1234"
-    
+
     # Alternation
     my $gen2 = Data::Random::String::Matches->new(qr/(cat|dog|bird)/);
     my $animal = $gen2->generate_smart();  # "cat", "dog", or "bird"
-    
+
     # Backreferences
     my $gen3 = Data::Random::String::Matches->new(qr/(\w{3})-\1/);
     my $str3 = $gen3->generate_smart();  # e.g., "abc-abc"
-    
+
     # Groups and quantifiers
     my $gen4 = Data::Random::String::Matches->new(qr/(ha){2,4}/);
     my $laugh = $gen4->generate_smart();  # "haha", "hahaha", or "hahahaha"
@@ -83,13 +83,13 @@ a wide range of regex features.
 
     # Email-like pattern
     my $gen = Data::Random::String::Matches->new(qr/[a-z]+@[a-z]+\.com/);
-    
+
     # API key pattern
     my $gen = Data::Random::String::Matches->new(qr/^AIza[0-9A-Za-z_-]{35}$/);
-    
+
     # Phone number
     my $gen = Data::Random::String::Matches->new(qr/\d{3}-\d{3}-\d{4}/);
-    
+
     # Repeated pattern
     my $gen = Data::Random::String::Matches->new(qr/(\w{4})-\1/);
 
@@ -111,9 +111,11 @@ falls back to brute force if needed. Tries up to `$max_attempts` times
 Parses the regex and builds a matching string directly. Faster and more reliable
 than brute force, but may not handle all edge cases.
 
-# create\_random\_string
+## create\_random\_string
 
 For consistency with [Data::Random::String](https://metacpan.org/pod/Data%3A%3ARandom%3A%3AString).
+
+    print Data::Random::String->create_random_string(length => 3, regex => '\d{3}'), "\n";
 
 # AUTHOR
 
