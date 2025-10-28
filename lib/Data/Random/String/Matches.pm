@@ -1,5 +1,7 @@
 package Data::Random::String::Matches;
 
+use 5.010;
+
 use strict;
 use warnings;
 
@@ -35,6 +37,23 @@ Data::Random::String::Matches - Generate random strings matching a regex
 	# Groups and quantifiers
 	my $gen4 = Data::Random::String::Matches->new(qr/(ha){2,4}/);
 	my $laugh = $gen4->generate_smart();  # "haha", "hahaha", or "hahahaha"
+
+	# Unicode
+	$gen = Data::Random::String::Matches->new(qr/\p{L}{5}/);
+
+	# Named captures
+	$gen = Data::Random::String::Matches->new(qr/(?<year>\d{4})-\k<year>/);
+
+	# Possessive
+	$gen = Data::Random::String::Matches->new(qr/\d++[A-Z]/);
+
+	# Lookaheads
+	$gen = Data::Random::String::Matches->new(qr/\d{3}(?=[A-Z])/);
+
+	# Combined
+	$gen = Data::Random::String::Matches->new(
+    		qr/(?<prefix>\p{Lu}{2})\d++\k<prefix>(?=[A-Z])/
+	);
 
 	# Consistency with Legacy software
 	print Data::Random::String::Matches->create_random_string(length => 3, regex => '\d{3}'), "\n";
@@ -136,6 +155,22 @@ a wide range of regex features.
 =item * Unicode properties (C<\p{}>) are not supported
 
 =item * Some complex nested patterns may not work correctly
+
+=back
+
+=head1 LIMITATIONS
+
+=over 4
+
+=item * Lookaheads and lookbehinds ((?=...), (?!...)) are not supported
+
+=item * Named groups ((?<name>...)) are not supported
+
+=item * Possessive quantifiers (*+, ++) are not supported
+
+=item * Unicode properties (\p{L}, \p{N}) are not supported
+
+=item * Some complex nested patterns may not work correctly with smart parsing
 
 =back
 
@@ -734,7 +769,6 @@ sub _unicode_property_chars {
 		return ('a'..'z', 'A'..'Z');
 	}
 }
-
 
 =head2 create_random_string
 

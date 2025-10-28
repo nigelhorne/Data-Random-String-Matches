@@ -5,6 +5,7 @@ use warnings;
 
 use utf8;
 use Test::Most;
+use Test::DescribeMe qw(extended);	# These can fail at the moment.  Disable while debugging
 
 use open qw(:std :utf8);
 

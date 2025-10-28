@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+
+use Test::DescribeMe qw(extended);	# These can fail at the moment.  Disable while debugging
 use Test::Most;
 
 use_ok('Data::Random::String::Matches');

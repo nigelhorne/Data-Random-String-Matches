@@ -4,29 +4,29 @@ Data::Random::String::Matches - Generate random strings matching a regex
 
 # SYNOPSIS
 
-    use Data::Random::String::Matches;
+        use Data::Random::String::Matches;
 
-    # Create generator with regex and optional length
-    my $gen = Data::Random::String::Matches->new(qr/[A-Z]{3}\d{4}/, 7);
+        # Create generator with regex and optional length
+        my $gen = Data::Random::String::Matches->new(qr/[A-Z]{3}\d{4}/, 7);
 
-    # Generate a matching string
-    my $str = $gen->generate();
-    print $str;  # e.g., "XYZ1234"
+        # Generate a matching string
+        my $str = $gen->generate();
+        print $str;  # e.g., "XYZ1234"
 
-    # Alternation
-    my $gen2 = Data::Random::String::Matches->new(qr/(cat|dog|bird)/);
-    my $animal = $gen2->generate_smart();  # "cat", "dog", or "bird"
+        # Alternation
+        my $gen2 = Data::Random::String::Matches->new(qr/(cat|dog|bird)/);
+        my $animal = $gen2->generate_smart();  # "cat", "dog", or "bird"
 
-    # Backreferences
-    my $gen3 = Data::Random::String::Matches->new(qr/(\w{3})-\1/);
-    my $str3 = $gen3->generate_smart();  # e.g., "abc-abc"
+        # Backreferences
+        my $gen3 = Data::Random::String::Matches->new(qr/(\w{3})-\1/);
+        my $str3 = $gen3->generate_smart();  # e.g., "abc-abc"
 
-    # Groups and quantifiers
-    my $gen4 = Data::Random::String::Matches->new(qr/(ha){2,4}/);
-    my $laugh = $gen4->generate_smart();  # "haha", "hahaha", or "hahahaha"
+        # Groups and quantifiers
+        my $gen4 = Data::Random::String::Matches->new(qr/(ha){2,4}/);
+        my $laugh = $gen4->generate_smart();  # "haha", "hahaha", or "hahahaha"
 
-    # Consistency with Legacy software
-    print Data::Random::String::Matches->create_random_string(length => 3, regex => '\d{3}'), "\n";
+        # Consistency with Legacy software
+        print Data::Random::String::Matches->create_random_string(length => 3, regex => '\d{3}'), "\n";
 
 # DESCRIPTION
 
@@ -84,17 +84,17 @@ a wide range of regex features.
 
 # EXAMPLES
 
-    # Email-like pattern
-    my $gen = Data::Random::String::Matches->new(qr/[a-z]+@[a-z]+\.com/);
+        # Email-like pattern
+        my $gen = Data::Random::String::Matches->new(qr/[a-z]+@[a-z]+\.com/);
 
-    # API key pattern
-    my $gen = Data::Random::String::Matches->new(qr/^AIza[0-9A-Za-z_-]{35}$/);
+        # API key pattern
+        my $gen = Data::Random::String::Matches->new(qr/^AIza[0-9A-Za-z_-]{35}$/);
 
-    # Phone number
-    my $gen = Data::Random::String::Matches->new(qr/\d{3}-\d{3}-\d{4}/);
+        # Phone number
+        my $gen = Data::Random::String::Matches->new(qr/\d{3}-\d{3}-\d{4}/);
 
-    # Repeated pattern
-    my $gen = Data::Random::String::Matches->new(qr/(\w{4})-\1/);
+        # Repeated pattern
+        my $gen = Data::Random::String::Matches->new(qr/(\w{4})-\1/);
 
 # METHODS
 

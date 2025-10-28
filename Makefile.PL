@@ -38,8 +38,10 @@ WriteMakefile(
 		'warnings' => 0,
 	}, PREREQ_PM => {
 		'Carp' => 0,
+		'Getopt::Long' => 0,
 		'ExtUtils::MakeMaker' => 6.64,	# Minimum version for TEST_REQUIRES
 		'Params::Get' => 0.13,
+		'Pod::Usage' => 0,
 	}, dist => $dist,
 	clean		=> { FILES => 'Data-Random-String-Matches-*' },
 	# META_ADD => {
@@ -63,5 +65,5 @@ WriteMakefile(
 			}
 		},
 	},
-	MIN_PERL_VERSION	=> '5.008'
+	MIN_PERL_VERSION	=> '5.010'
 );
