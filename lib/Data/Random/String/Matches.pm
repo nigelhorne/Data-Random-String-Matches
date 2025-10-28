@@ -19,7 +19,7 @@ Data::Random::String::Matches - Generate random strings matching a regex
 
 	use Data::Random::String::Matches;
 
-	# Create generator with regex and optional length
+	# Create a generator with regex and optional length
 	my $gen = Data::Random::String::Matches->new(qr/[A-Z]{3}\d{4}/, 7);
 
 	# Generate a matching string
@@ -306,9 +306,9 @@ sub _build_from_pattern {
 	# Handle (?^:...), (?i:...), (?-i:...) etc
 	$pattern =~ s/^\(\?\^?[iumsx-]*:(.*)\)$/$1/;
 
-	# Remove anchors but note them
-	my $has_start_anchor = ($pattern =~ s/^\^//);
-	my $has_end_anchor = ($pattern =~ s/\$$//);
+	# Remove anchors (they're handled by the regex match itself)
+	$pattern =~ s/^\^//;
+	$pattern =~ s/\$//;
 
 	return $self->_parse_sequence($pattern);
 }
@@ -539,6 +539,7 @@ sub _handle_quantifier {
 
 	if ($next eq '{') {
 		my $end = index($pattern, '}', $pos + 1);
+		croak "Unmatched '}'" if ($end == -1);
 		my $quant = substr($pattern, $pos + 2, $end - $pos - 2);
 
 		# Check for possessive after }
@@ -651,24 +652,6 @@ sub _find_matching_paren {
 		if ($char eq '(' && $prev ne '\\') {
 			$depth++;
 		} elsif ($char eq ')' && $prev ne '\\') {
-			$depth--;
-			return $i if $depth == 0;
-		}
-	}
-	return -1;
-}
-
-sub _find_matching_curly_bracket {
-	my ($self, $pattern, $start) = @_;
-
-	my $depth = 0;
-	for (my $i = $start; $i < length($pattern); $i++) {
-		my $char = substr($pattern, $i, 1);
-		my $prev = $i > 0 ? substr($pattern, $i-1, 1) : '';
-
-		if ($char eq '{' && $prev ne '\\') {
-			$depth++;
-		} elsif ($char eq '}' && $prev ne '\\') {
 			$depth--;
 			return $i if $depth == 0;
 		}

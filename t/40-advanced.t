@@ -184,6 +184,7 @@ subtest 'Mixed features' => sub {
 	# Alternation with backreferences
 	my $gen1 = Data::Random::String::Matches->new(qr/(cat|dog)-\1/);
 	my $str1 = $gen1->generate_smart();
+
 	like($str1, qr/^(cat|dog)-\1$/, 'Alternation with backreference');
 	ok($str1 eq 'cat-cat' || $str1 eq 'dog-dog', 'Correct repetition');
 
