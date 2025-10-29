@@ -54,7 +54,7 @@ subtest 'set_seed - error handling' => sub {
 	my $gen = Data::Random::String::Matches->new(qr/\d{4}/);
 
 	eval { $gen->set_seed() };
-	like($@, qr/Seed must be defined/, 'Dies without seed');
+	like($@, qr/Usage/, 'Dies without seed');
 
 	eval { $gen->set_seed(undef) };
 	like($@, qr/Seed must be defined/, 'Dies with undef seed');
@@ -122,7 +122,7 @@ subtest 'validate - error handling' => sub {
 	my $gen = Data::Random::String::Matches->new(qr/\d{4}/);
 
 	eval { $gen->validate() };
-	like($@, qr/String must be defined/, 'Dies without string');
+	like($@, qr/Usage/, 'Dies without string');
 
 	eval { $gen->validate(undef) };
 	like($@, qr/String must be defined/, 'Dies with undef');

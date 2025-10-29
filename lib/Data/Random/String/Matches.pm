@@ -349,7 +349,9 @@ Sets the random seed for reproducible generation
 =cut
 
 sub set_seed {
-	my ($self, $seed) = @_;
+	my $self = shift;
+	my $params = Params::Get::get_params('seed', \@_);
+	my $seed = $params->{'seed'};
 
 	croak 'Seed must be defined' unless defined $seed;
 
@@ -370,9 +372,11 @@ Checks if a string matches the pattern without generating.
 =cut
 
 sub validate {
-	my ($self, $string) = @_;
+	my $self = shift;
+	my $params = Params::Get::get_params('string', \@_);
+	my $string = $params->{'string'};
 
-	croak 'String must be defined' unless defined $string;
+	croak('String must be defined') unless defined $string;
 
 	my $regex = $self->{regex};
 	return $string =~ /^$regex$/;
