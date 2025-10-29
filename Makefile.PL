@@ -27,21 +27,27 @@ WriteMakefile(
 		'ExtUtils::MakeMaker' => 6.64,	# Minimum version for TEST_REQUIRES
 	},
 	EXE_FILES => ['bin/random-string', 'bin/cookbook'],
-	TEST_REQUIRES => {
-		'File::Temp' => 0,
-		'IPC::Run3' => 0,
-		'Test::Compile' => 0,
-		'Test::DescribeMe' => 0,
-		'Test::Most' => 0,
-		'Test::NoWarnings' => 0,
-		'strict' => 0,
-		'warnings' => 0,
-	}, PREREQ_PM => {
+	PREREQ_PM => {
 		'Carp' => 0,
 		'Getopt::Long' => 0,
 		'ExtUtils::MakeMaker' => 6.64,	# Minimum version for TEST_REQUIRES
 		'Params::Get' => 0.13,
 		'Pod::Usage' => 0,
+	}, TEST_REQUIRES => {
+		'File::Glob' => 0,
+		'File::Slurp' => 0,
+		'File::stat' => 0,
+		'File::Temp' => 0,
+		'IPC::Run3' => 0,
+		'JSON::MaybeXS' => 0,
+		'POSIX' => 0,
+		'Readonly' => 0,
+		'strict' => 0,
+		'Test::Compile' => 0,
+		'Test::DescribeMe' => 0,
+		'Test::Most' => 0,
+		'Test::NoWarnings' => 0,
+		'warnings' => 0,
 	}, dist => $dist,
 	clean		=> { FILES => 'Data-Random-String-Matches-*' },
 	# META_ADD => {
