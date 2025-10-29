@@ -141,7 +141,28 @@ than brute force, but may not handle all edge cases.
 
 ## generate\_many($count, $unique)
 
-Generate a number of (possibly) unique strings for the regex
+Generates multiple random strings matching the regex.
+
+    my @strings = $gen->generate_many(10);           # 10 strings (may have duplicates)
+    my @strings = $gen->generate_many(10, 1);        # 10 unique strings
+    my @strings = $gen->generate_many(10, 'unique'); # 10 unique strings
+
+    # Generate until you have 1000 unique codes
+    my $gen = Data::Random::String::Matches->new(qr/[A-Z]{3}\d{4}/);
+    my @codes = $gen->generate_many(1000, 'unique');
+
+Parameters:
+
+- `$count` - Number of strings to generate (required, must be positive)
+- `$unique` - If true, ensures all generated strings are unique. May return fewer
+than `$count` strings if uniqueness cannot be achieved within reasonable attempts.
+Accepts any true value (1, 'unique', etc.)
+
+Returns: List of generated strings
+
+Dies: If count is not a positive integer
+
+Warns: If unable to generate the requested number of unique strings
 
 ## create\_random\_string
 
