@@ -156,6 +156,10 @@ Dies: If count is not a positive integer
 
 Warns: If unable to generate the requested number of unique strings
 
+## get\_seed()
+
+Gets the random seed for reproducible generation
+
 ## set\_seed($seed)
 
 Sets the random seed for reproducible generation

@@ -48,6 +48,8 @@ subtest 'set_seed - different seeds produce different results' => sub {
 	my $str2 = $gen->generate();
 
 	isnt($str1, $str2, 'Different seeds produce different results');
+
+	cmp_ok($gen->get_seed(), '==', 222, 'Get seed works');
 };
 
 subtest 'set_seed - error handling' => sub {

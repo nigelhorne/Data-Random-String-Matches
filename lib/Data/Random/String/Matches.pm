@@ -194,7 +194,7 @@ sub new {
 		regex_str => "$regex",
 		length	=> $length || 10,
 		backrefs	=> {},  # Store backreferences
-		named_refs  => {},	   # Store named captures
+		named_refs => {},	 # Store named captures
 	};
 
 	return bless $self, $class;
@@ -321,7 +321,7 @@ sub generate_many {
 		# Generate unique strings
 		my %seen;
 		my $attempts = 0;
-		my $max_attempts = $count * 100;  # Reasonable limit
+		my $max_attempts = $count * 100;	# Reasonable limit
 
 		while (keys %seen < $count && $attempts < $max_attempts) {
 			my $str = $self->generate();
@@ -340,6 +340,18 @@ sub generate_many {
 	}
 
 	return @results;
+}
+
+=head2 get_seed()
+
+Gets the random seed for reproducible generation
+
+=cut
+
+sub get_seed {
+	my $self = shift;
+
+	return $self->{seed};
 }
 
 =head2 set_seed($seed)
