@@ -311,8 +311,8 @@ print "\n";
 # Example 6.2: VIN-like numbers
 print "6.2 VIN-style identifiers (simplified):\n";
 {
-    my $gen = Data::Random::String::Matches->new(qr/[A-HJ-NPR-Z0-9]{17}/);
-    print "  ", $gen->generate(), "\n" for (1..2);
+	my $gen = Data::Random::String::Matches->new(qr/[A-HJ-NPR-Z0-9]{17}/);
+	print '  ', $gen->generate(), "\n" for (1..2);
 }
 print "\n";
 
