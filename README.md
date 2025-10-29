@@ -164,6 +164,34 @@ Dies: If count is not a positive integer
 
 Warns: If unable to generate the requested number of unique strings
 
+## set\_seed($seed)
+
+Sets the random seed for reproducible generation
+
+## validate($string)
+
+Checks if a string matches the pattern without generating.
+
+    if ($gen->validate('1234')) {
+      print "Valid!\n";
+    }
+
+## pattern\_info()
+
+Returns detailed information about the pattern.
+
+    my $info = $gen->pattern_info();
+    print "Complexity: $info->{complexity}\n";
+    print "Min length: $info->{min_length}\n";
+    print "Has Unicode: ", $info->{features}{has_unicode} ? "Yes" : "No", "\n";
+
+`pattern_info` analyzes a regular expression to produce a structured summary of its characteristics,
+including estimated string lengths, detected features, and an overall complexity rating.
+It first calls `_estimate_length` to heuristically compute the minimum and maximum possible lengths of strings matching the pattern by scanning for literals,
+character classes, and quantifiers.
+It then detects the presence of advanced regex constructions such as alternation, lookahead or lookbehind assertions, named groups, and Unicode properties, storing them in a feature hash.
+Finally, it calculates a rough "complexity" classification based on pattern length and detected features-returning a hash reference that describes the regex's structure, estimated lengths, and complexity level.
+
 ## create\_random\_string
 
 For consistency with [Data::Random::String](https://metacpan.org/pod/Data%3A%3ARandom%3A%3AString).
@@ -174,10 +202,11 @@ For consistency with [Data::Random::String](https://metacpan.org/pod/Data%3A%3AR
 
 Nigel Horne, `<njh at nigelhorne.com>`
 
-# LICENSE
+# SEE ALSO
 
-This is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself.
+- Test coverage report: [https://nigelhorne.github.io/Data-Random-String-Matches/coverage/](https://nigelhorne.github.io/Data-Random-String-Matches/coverage/)
+- [String::Random](https://metacpan.org/pod/String%3A%3ARandom)
+- [Regexp::Genex](https://metacpan.org/pod/Regexp%3A%3AGenex)
 
 # LICENCE AND COPYRIGHT
 

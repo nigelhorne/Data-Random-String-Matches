@@ -403,6 +403,13 @@ Returns detailed information about the pattern.
   print "Min length: $info->{min_length}\n";
   print "Has Unicode: ", $info->{features}{has_unicode} ? "Yes" : "No", "\n";
 
+C<pattern_info> analyzes a regular expression to produce a structured summary of its characteristics,
+including estimated string lengths, detected features, and an overall complexity rating.
+It first calls C<_estimate_length> to heuristically compute the minimum and maximum possible lengths of strings matching the pattern by scanning for literals,
+character classes, and quantifiers.
+It then detects the presence of advanced regex constructions such as alternation, lookahead or lookbehind assertions, named groups, and Unicode properties, storing them in a feature hash.
+Finally, it calculates a rough "complexity" classification based on pattern length and detected features-returning a hash reference that describes the regex's structure, estimated lengths, and complexity level.
+
 =cut
 
 sub pattern_info {
