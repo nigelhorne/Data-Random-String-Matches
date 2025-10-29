@@ -358,6 +358,146 @@ sub generate_many {
 	return @results;
 }
 
+=head2 set_seed($seed)
+
+Sets the random seed for reproducible generation
+
+=cut
+
+sub set_seed {
+	my ($self, $seed) = @_;
+
+	croak 'Seed must be defined' unless defined $seed;
+
+	srand($seed);
+	$self->{seed} = $seed;
+
+	return $self;
+}
+
+=head2 validate($string)
+
+Checks if a string matches the pattern without generating.
+
+  if ($gen->validate('1234')) {
+    print "Valid!\n";
+  }
+
+=cut
+
+sub validate {
+	my ($self, $string) = @_;
+
+	croak 'String must be defined' unless defined $string;
+
+	my $regex = $self->{regex};
+	return $string =~ /^$regex$/;
+}
+
+=head2 pattern_info()
+
+Returns detailed information about the pattern.
+
+  my $info = $gen->pattern_info();
+  print "Complexity: $info->{complexity}\n";
+  print "Min length: $info->{min_length}\n";
+  print "Has Unicode: ", $info->{features}{has_unicode} ? "Yes" : "No", "\n";
+
+=cut
+
+sub pattern_info {
+	my ($self) = @_;
+
+	my $pattern = $self->{regex_str};
+
+	# Calculate approximate min/max lengths
+	my ($min_len, $max_len) = $self->_estimate_length($pattern);
+
+	# Detect pattern features
+	my %features = (
+		has_alternation     => ($pattern =~ /\|/ ? 1 : 0),
+		has_backreferences  => ($pattern =~ /(\\[1-9]|\\k<)/ ? 1 : 0),
+		has_unicode         => ($pattern =~ /\\p\{/ ? 1 : 0),
+		has_lookahead       => ($pattern =~ /\(\?[=!]/ ? 1 : 0),
+		has_lookbehind      => ($pattern =~ /\(\?<[=!]/ ? 1 : 0),
+		has_named_groups    => ($pattern =~ /\(\?</ ? 1 : 0),
+		has_possessive      => ($pattern =~ /(?:[+*?]\+|\{\d+(?:,\d*)?\}\+)/ ? 1 : 0),
+	);
+	
+	return {
+		pattern             => $pattern,
+		min_length          => $min_len,
+		max_length          => $max_len,
+		estimated_length    => int(($min_len + $max_len) / 2),
+		features            => \%features,
+		complexity          => $self->_calculate_complexity(\%features, $pattern),
+	};
+}
+
+# FIXME: min_length can be one too small
+sub _estimate_length {
+	my ($self, $pattern) = @_;
+
+	# Remove anchors and modifiers
+	$pattern =~ s/^\(\?\^?[iumsx-]*:(.*)\)$/$1/;
+	$pattern =~ s/^\^//;
+	$pattern =~ s/\$//;
+
+	my $min = 0;
+	my $max = 0;
+
+	# Simple heuristic - count fixed characters and quantifiers
+	while ($pattern =~ /([^+*?{}\[\]\\])|\\[dwsWDN]|\[([^\]]+)\]|\{(\d+)(?:,(\d+))?\}/g) {
+		if (defined $1 || (defined $2 && $2)) {
+			# Fixed character or character class
+			$min++;
+			$max++;
+		} elsif (defined $3) {
+			# Quantifier {n} or {n,m}
+			$min += $3;
+			$max += defined $4 ? $4 : $3;
+		}
+	}
+
+	# Account for +, *, ?
+	my $plus_count = () = $pattern =~ /\+/g;
+	my $star_count = () = $pattern =~ /\*/g;
+	my $question_count = () = $pattern =~ /\?/g;
+
+	$min += $plus_count;  # + means at least 1
+	$max += ($plus_count * 5) + ($star_count * 5);  # Assume max 5 repetitions
+	$min -= $question_count;  # ? makes things optional
+
+	$min = 0 if $min < 0;
+	$max = $min + 50 if $max < $min;  # Ensure max >= min
+
+	return ($min, $max);
+}
+
+sub _calculate_complexity {
+	my ($self, $features, $pattern) = @_;
+
+	my $score = 0;
+
+	# Base complexity from pattern length
+	$score += length($pattern) / 10;
+
+	# Add complexity for features
+	$score += 2 if $features->{has_alternation};
+	$score += 3 if $features->{has_backreferences};
+	$score += 2 if $features->{has_unicode};
+	$score += 2 if $features->{has_lookahead};
+	$score += 2 if $features->{has_lookbehind};
+	$score += 1 if $features->{has_named_groups};
+	$score += 1 if $features->{has_possessive};
+
+	# Classify
+	return 'simple'   if $score < 3;
+	return 'moderate' if $score < 7;
+	return 'complex'  if $score < 12;
+	return 'very_complex';
+}
+
 sub _build_from_pattern {
 	my ($self, $pattern) = @_;
 
@@ -840,10 +980,17 @@ sub create_random_string
 
 Nigel Horne, C<< <njh at nigelhorne.com> >>
 
-=head1 LICENSE
+=head1 SEE ALSO
 
-This is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself.
+=over 4
+
+=item * Test coverage report: L<https://nigelhorne.github.io/Data-Random-String-Matches/coverage/>
+
+=item * L<String::Random>
+
+=item * L<Regexp::Genex>
+
+=end
 
 =head1 LICENCE AND COPYRIGHT
 

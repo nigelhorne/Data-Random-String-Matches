@@ -21,3 +21,4 @@ t/generate.t
 t/pod-cm.t
 t/pod-synopsis.t
 t/pod.t
+t/utility_methods.t

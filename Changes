@@ -1,5 +1,9 @@
 Revision history for Data-Random-String-Matches
 
+0.03
+	Added some utility methods
+	Added the test dashboard
+
 0.02	Tue Oct 28 20:16:01 EDT 2025
 	Added more obscure regex features
 	Fixed Unicode characters
