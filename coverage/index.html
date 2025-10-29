@@ -65,7 +65,7 @@
 	<a href="https://github.com/nigelhorne/Data-Random-String-Matches">
 		<img src="https://img.shields.io/github/stars/nigelhorne/Data-Random-String-Matches?style=social" alt="GitHub stars">
 	</a>
-	<img src="https://img.shields.io/badge/coverage-86%25-brightgreen" alt="Coverage badge">
+	<img src="https://img.shields.io/badge/coverage-87%25-brightgreen" alt="Coverage badge">
 </div>
 <h1>Data::Random::String::Matches</h1><h2>Coverage Report</h2>
 <table data-sort-col="0" data-sort-order="asc">
@@ -84,15 +84,33 @@
 
 <tbody>
 
-<tr class="high"><td><a href="bin-random-string.html" title="View coverage line by line" target="_blank">bin/random-string</a> <a href="https://github.com/nigelhorne/Data-Random-String-Matches/blob/4735db34e75431f75ce26c00f31fdd82eada2916/bin/random-string" class="icon-link" title="View source on GitHub">&#128269;</a><canvas class="sparkline" width="80" height="20" data-points=""></canvas></td><td>96.1</td><td>81.8</td><td>0.0</td><td>100.0</td><td><span class="coverage-badge badge-good" title="Excellent coverage">92.4%</span></td><td class="neutral" title="No previous data">&#9679;</td></tr>
+<tr class="med"><td><a href="-opt-hostedtoolcache-perl-5.40.3-x64-bin-perldoc.html" title="View coverage line by line" target="_blank">/opt/hostedtoolcache/perl/5.40.3/x64/bin/perldoc</a> <a href="https://github.com/nigelhorne/Data-Random-String-Matches/blob/0a7b62578c342d8939f2ef182d3ab553f39dbe59//opt/hostedtoolcache/perl/5.40.3/x64/bin/perldoc" class="icon-link" title="View source on GitHub">&#128269;</a><canvas class="sparkline" width="80" height="20" data-points="0.0"></canvas></td><td>100.0</td><td>50.0</td><td>0.0</td><td>100.0</td><td><span class="coverage-badge badge-warn" title="Moderate coverage">85.7%</span></td><td class="positive" title="Previous: 0.0%">&#9650; 85.7%</td></tr>
 
-<tr class="med"><td><a href="blib-lib-Data-Random-String-Matches-pm.html" title="View coverage line by line" target="_blank">blib/lib/Data/Random/String/Matches.pm</a> <a href="https://github.com/nigelhorne/Data-Random-String-Matches/blob/4735db34e75431f75ce26c00f31fdd82eada2916/blib/lib/Data/Random/String/Matches.pm" class="icon-link" title="View source on GitHub">&#128269;</a><canvas class="sparkline" width="80" height="20" data-points=""></canvas></td><td>94.3</td><td>82.3</td><td>58.6</td><td>100.0</td><td><span class="coverage-badge badge-warn" title="Moderate coverage">85.8%</span></td><td class="neutral" title="No previous data">&#9679;</td></tr>
+<tr class="high"><td><a href="bin-random-string.html" title="View coverage line by line" target="_blank">bin/random-string</a> <a href="https://github.com/nigelhorne/Data-Random-String-Matches/blob/0a7b62578c342d8939f2ef182d3ab553f39dbe59/bin/random-string" class="icon-link" title="View source on GitHub">&#128269;</a><canvas class="sparkline" width="80" height="20" data-points="92.4"></canvas></td><td>98.0</td><td>90.9</td><td>0.0</td><td>100.0</td><td><span class="coverage-badge badge-good" title="Excellent coverage">96.2%</span></td><td class="positive" title="Previous: 92.4%">&#9650; 3.8%</td></tr>
 
-<tr class="summary-row nosort"><td colspan="2"><strong>Summary</strong></td><td colspan="2">2 files</td><td colspan="3">Avg: 89%, Low: 0</td></tr>
+<tr class="med"><td><a href="blib-lib-Data-Random-String-Matches-pm.html" title="View coverage line by line" target="_blank">blib/lib/Data/Random/String/Matches.pm</a> <a href="https://github.com/nigelhorne/Data-Random-String-Matches/blob/0a7b62578c342d8939f2ef182d3ab553f39dbe59/blib/lib/Data/Random/String/Matches.pm" class="icon-link" title="View source on GitHub">&#128269;</a><canvas class="sparkline" width="80" height="20" data-points="85.8"></canvas></td><td>94.6</td><td>82.9</td><td>60.4</td><td>100.0</td><td><span class="coverage-badge badge-warn" title="Moderate coverage">86.4%</span></td><td class="positive" title="Previous: 85.8%">&#9650; 0.6%</td></tr>
 
-<tr class="high nosort"><td><strong>Total</strong></td><td>94.5</td><td>82.3</td><td>58.6</td><td>100.0</td><td colspan="2"><strong>86.4</strong></td></tr>
+<tr class="summary-row nosort"><td colspan="2"><strong>Summary</strong></td><td colspan="2">3 files</td><td colspan="3">Avg: 89%, Low: 0</td></tr>
+
+<tr class="high nosort"><td><strong>Total</strong></td><td>95.1</td><td>83.1</td><td>60.4</td><td>100.0</td><td colspan="2"><strong>87.3</strong></td></tr>
 
 </tbody></table>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
+	<div>
+		<h2>Coverage Trend</h2>
+		<label>
+			<input type="checkbox" id="toggleTrend" checked>
+			Show regression trend
+		</label>
+		<div>
+		</div>
+	</div>
+	<div id="zoomControls" style="margin-top:8px;">
+		<input type="button" value="Refresh" onClick="refresh(this)">
+		<button id="resetZoomBtn" type="button">Reset Zoom</button>
+	</div>
+</div>
+
 <canvas id="coverageTrend" width="600" height="300"></canvas>
 <!-- Zoom controls for the trend chart -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -119,7 +137,7 @@ function linearRegression(data) {
 	}));
 }
 
-const dataPoints = [  ];
+const dataPoints = [ { x: "2025-10-29T09:56:55-04:00", y: 86.4226682408501, delta: 0, url: "https://github.com/nigelhorne/Data-Random-String-Matches/commit/4735db3", label: "2025-10-29T09:56:55-04:00", pointBackgroundColor: "gray", comment: "Complete the dashboard" } ];
 
 const regressionPoints = linearRegression(dataPoints);
 // Try to register the zoom plugin (handles different UMD builds)
@@ -380,7 +398,7 @@ function refresh(){
 <footer>
 	<p><span style="margin-left:8px;color:#666;font-size:0.9em;">Use mouse wheel or pinch to zoom; drag to pan</span></p>
 	<p>Project: <a href="https://github.com/nigelhorne/Data-Random-String-Matches">Data-Random-String-Matches</a></p>
-	<p><em>Last updated: 2025-10-29 14:02:05 - <a href="https://github.com/nigelhorne/Data-Random-String-Matches/commit/4735db34e75431f75ce26c00f31fdd82eada2916">commit <code>4735db3</code></a></em></p>
+	<p><em>Last updated: 2025-10-29 18:52:19 - <a href="https://github.com/nigelhorne/Data-Random-String-Matches/commit/0a7b62578c342d8939f2ef182d3ab553f39dbe59">commit <code>0a7b625</code></a></em></p>
 </footer>
 </body>
 </html>
