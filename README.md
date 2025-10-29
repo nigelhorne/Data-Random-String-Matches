@@ -6,7 +6,7 @@ Data::Random::String::Matches - Generate random strings matching a regex
 
         use Data::Random::String::Matches;
 
-        # Create generator with regex and optional length
+        # Create a generator with regex and optional length
         my $gen = Data::Random::String::Matches->new(qr/[A-Z]{3}\d{4}/, 7);
 
         # Generate a matching string
@@ -24,6 +24,23 @@ Data::Random::String::Matches - Generate random strings matching a regex
         # Groups and quantifiers
         my $gen4 = Data::Random::String::Matches->new(qr/(ha){2,4}/);
         my $laugh = $gen4->generate_smart();  # "haha", "hahaha", or "hahahaha"
+
+        # Unicode
+        $gen = Data::Random::String::Matches->new(qr/\p{L}{5}/);
+
+        # Named captures
+        $gen = Data::Random::String::Matches->new(qr/(?<year>\d{4})-\k<year>/);
+
+        # Possessive
+        $gen = Data::Random::String::Matches->new(qr/\d++[A-Z]/);
+
+        # Lookaheads
+        $gen = Data::Random::String::Matches->new(qr/\d{3}(?=[A-Z])/);
+
+        # Combined
+        $gen = Data::Random::String::Matches->new(
+                qr/(?<prefix>\p{Lu}{2})\d++\k<prefix>(?=[A-Z])/
+        );
 
         # Consistency with Legacy software
         print Data::Random::String::Matches->create_random_string(length => 3, regex => '\d{3}'), "\n";
@@ -82,6 +99,14 @@ a wide range of regex features.
 - Unicode properties (`\p{}`) are not supported
 - Some complex nested patterns may not work correctly
 
+# LIMITATIONS
+
+- Lookaheads and lookbehinds ((?=...), (?!...)) are not supported
+- Named groups ((?&lt;name>...)) are not supported
+- Possessive quantifiers (\*+, ++) are not supported
+- Unicode properties (\\p{L}, \\p{N}) are not supported
+- Some complex nested patterns may not work correctly with smart parsing
+
 # EXAMPLES
 
         # Email-like pattern
@@ -113,6 +138,10 @@ falls back to brute force if needed. Tries up to `$max_attempts` times
 
 Parses the regex and builds a matching string directly. Faster and more reliable
 than brute force, but may not handle all edge cases.
+
+## generate\_many($count, $unique)
+
+Generate a number of (possibly) unique strings for the regex
 
 ## create\_random\_string
 
