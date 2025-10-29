@@ -2,6 +2,7 @@ bin/cookbook
 bin/random-string
 Changes
 doc/cookbook.md
+examples/bulk-generation
 lib/Data/Random/String/Matches.pm
 LICENSE
 Makefile.PL
@@ -15,6 +16,7 @@ t/advanced_regex.t
 t/cli.t
 t/eof.t
 t/eol.t
+t/generate-many.t
 t/generate.t
 t/pod-cm.t
 t/pod-synopsis.t

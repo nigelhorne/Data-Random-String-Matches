@@ -5,7 +5,7 @@ use 5.010;
 use strict;
 use warnings;
 
-use Carp qw(croak);
+use Carp qw(carp croak);
 use Params::Get;
 use utf8;
 
@@ -292,6 +292,44 @@ than brute force, but may not handle all edge cases.
 sub generate_smart {
 	my $self = $_[0];
 	return $self->_build_from_pattern($self->{regex_str});
+}
+
+=head2 generate_many($count, $unique)
+
+Generate a number of (possibly) unique strings for the regex
+
+=cut
+
+sub generate_many {
+	my ($self, $count, $unique) = @_;
+	
+	croak 'Count must be a positive integer' unless defined $count && $count > 0;
+	
+	my @results;
+	
+	if ($unique) {
+		# Generate unique strings
+		my %seen;
+		my $attempts = 0;
+		my $max_attempts = $count * 100;  # Reasonable limit
+		
+		while (keys %seen < $count && $attempts < $max_attempts) {
+			my $str = $self->generate();
+			$seen{$str} = 1;
+			$attempts++;
+		}
+		
+		if (keys %seen < $count) {
+			carp "Only generated ", (scalar keys %seen), " unique strings out of $count requested";
+		}
+		
+		@results = keys %seen;
+	} else {
+		# Generate any strings (may have duplicates)
+		push @results, $self->generate() for (1 .. $count);
+	}
+	
+	return @results;
 }
 
 sub _build_from_pattern {
