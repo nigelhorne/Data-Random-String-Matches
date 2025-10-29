@@ -10,54 +10,54 @@ our $VERSION = '0.02';
 
 # Parse command line options
 my %opts = (
-    count      => 1,
-    length     => undef,
-    smart      => 0,
-    unique     => 0,
-    separator  => "\n",
-    help       => 0,
-    man        => 0,
-    version    => 0,
-    examples   => 0,
+	count	  => 1,
+	length	 => undef,
+	smart	  => 0,
+	unique	 => 0,
+	separator  => "\n",
+	help	   => 0,
+	man		=> 0,
+	version	=> 0,
+	examples   => 0,
 );
 
 GetOptions(
-    'count|c=i'     => \$opts{count},
-    'length|l=i'    => \$opts{length},
-    'smart|s'       => \$opts{smart},
-    'unique|u'      => \$opts{unique},
-    'separator|S=s' => \$opts{separator},
-    'help|h|?'      => \$opts{help},
-    'man|m'         => \$opts{man},
-    'version|v'     => \$opts{version},
-    'examples|e'    => \$opts{examples},
+	'count|c=i'	 => \$opts{count},
+	'length|l=i'	=> \$opts{length},
+	'smart|s'	   => \$opts{smart},
+	'unique|u'	  => \$opts{unique},
+	'separator|S=s' => \$opts{separator},
+	'help|h|?'	  => \$opts{help},
+	'man|m'		 => \$opts{man},
+	'version|v'	 => \$opts{version},
+	'examples|e'	=> \$opts{examples},
 ) or pod2usage(2);
 
 # Handle special options
 if ($opts{version}) {
-    print "random-string version $VERSION\n";
-    exit 0;
+	print "random-string version $VERSION\n";
+	exit 0;
 }
 
 pod2usage(1) if $opts{help};
 pod2usage(-exitval => 0, -verbose => 2) if $opts{man};
 
 if ($opts{examples}) {
-    show_examples();
-    exit 0;
+	show_examples();
+	exit 0;
 }
 
 # Get the pattern from command line
 my $pattern = shift @ARGV;
 
 unless (defined $pattern) {
-    print STDERR "Error: Pattern required\n\n";
-    pod2usage(1);
+	print STDERR "Error: Pattern required\n\n";
+	pod2usage(1);
 }
 
 # Validate options
 if ($opts{count} < 1) {
-    die "Error: count must be at least 1\n";
+	die 'Error: count must be at least 1';
 }
 
 # Decode escape sequences in separator
@@ -68,25 +68,25 @@ $opts{separator} =~ s/\\0/\0/g;
 
 # Create generator
 my $gen = eval {
-    Data::Random::String::Matches->new($pattern, $opts{length});
+	Data::Random::String::Matches->new($pattern, $opts{length});
 };
 
 if ($@) {
-    die "Error creating generator: $@\n";
+	die "Error creating generator: $@";
 }
 
 # Generate strings
 my @results;
 for (1 .. $opts{count}) {
-    my $str = eval {
-        $opts{smart} ? $gen->generate_smart() : $gen->generate();
-    };
-    
-    if ($@) {
-        die "Error generating string: $@\n";
-    }
-    
-    push @results, $str;
+	my $str = eval {
+		$opts{smart} ? $gen->generate_smart() : $gen->generate();
+	};
+
+	if ($@) {
+		die "Error generating string: $@";
+	}
+
+	push @results, $str;
 }
 
 # Output results
@@ -96,7 +96,7 @@ print "\n" unless $opts{separator} =~ /\n$/;
 exit 0;
 
 sub show_examples {
-    print <<'EXAMPLES';
+	print <<'EXAMPLES';
 Examples:
 
   # Generate a single 4-digit number
@@ -133,14 +133,14 @@ Examples:
   random-string '[A-Z]{3}\d{4}' -c 100 --smart
 
 Common patterns:
-  \d{4}                    - 4-digit PIN
-  [A-Z]{2}\d{3}            - License plate style
-  \d{3}-\d{3}-\d{4}        - Phone number
-  [a-z]+@[a-z]+\.com       - Simple email
-  [A-Fa-f0-9]{32}          - MD5 hash
-  [A-Za-z0-9]{20}          - Random token
-  (foo|bar|baz)            - One of three options
-  (\w{4})-\1               - Repeated pattern
+  \d{4}					- 4-digit PIN
+  [A-Z]{2}\d{3}			- License plate style
+  \d{3}-\d{3}-\d{4}		- Phone number
+  [a-z]+@[a-z]+\.com	   - Simple email
+  [A-Fa-f0-9]{32}		  - MD5 hash
+  [A-Za-z0-9]{20}		  - Random token
+  (foo|bar|baz)			- One of three options
+  (\w{4})-\1			   - Repeated pattern
 
 EXAMPLES
 }
@@ -156,14 +156,14 @@ random-string - Generate random strings matching a regular expression
 random-string [options] PATTERN
 
   Options:
-    -c, --count N        Generate N strings (default: 1)
-    -l, --length N       Set length for fallback generation (default: 10)
-    -s, --smart          Use smart generation only (faster)
-    -S, --separator STR  Separator between outputs (default: newline)
-    -e, --examples       Show usage examples
-    -h, --help           Show brief help
-    -m, --man            Show full manual
-    -v, --version        Show version
+	-c, --count N		Generate N strings (default: 1)
+	-l, --length N	   Set length for fallback generation (default: 10)
+	-s, --smart		  Use smart generation only (faster)
+	-S, --separator STR  Separator between outputs (default: newline)
+	-e, --examples	   Show usage examples
+	-h, --help		   Show brief help
+	-m, --man			Show full manual
+	-v, --version		Show version
 
 =head1 DESCRIPTION
 
@@ -221,42 +221,42 @@ Print version information and exit.
 
 =head2 Character Classes
 
-  [a-z]      Lowercase letters
-  [A-Z]      Uppercase letters
-  [0-9]      Digits
-  [abc]      Specific characters
-  [^a-z]     Negated class
+  [a-z]	  Lowercase letters
+  [A-Z]	  Uppercase letters
+  [0-9]	  Digits
+  [abc]	  Specific characters
+  [^a-z]	 Negated class
 
 =head2 Escape Sequences
 
-  \d         Digit [0-9]
-  \w         Word character [a-zA-Z0-9_]
-  \s         Whitespace
-  \D         Non-digit
-  \W         Non-word character
+  \d		 Digit [0-9]
+  \w		 Word character [a-zA-Z0-9_]
+  \s		 Whitespace
+  \D		 Non-digit
+  \W		 Non-word character
   \t \n \r   Tab, newline, carriage return
 
 =head2 Quantifiers
 
-  {n}        Exactly n times
-  {n,m}      Between n and m times
-  {n,}       At least n times
-  +          One or more
-  *          Zero or more
-  ?          Zero or one
+  {n}		Exactly n times
+  {n,m}	  Between n and m times
+  {n,}	   At least n times
+  +		  One or more
+  *		  Zero or more
+  ?		  Zero or one
 
 =head2 Groups and Alternation
 
-  (...)      Capturing group
-  (?:...)    Non-capturing group
-  |          Alternation (cat|dog)
-  \1 \2      Backreferences
+  (...)	  Capturing group
+  (?:...)	Non-capturing group
+  |		  Alternation (cat|dog)
+  \1 \2	  Backreferences
 
 =head2 Other
 
-  .          Any character
-  ^          Start anchor (stripped)
-  $          End anchor (stripped)
+  .		  Any character
+  ^		  Start anchor (stripped)
+  $		  End anchor (stripped)
 
 =head1 EXAMPLES
 
