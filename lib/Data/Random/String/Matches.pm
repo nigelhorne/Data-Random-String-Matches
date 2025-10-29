@@ -423,7 +423,7 @@ sub pattern_info {
 		has_named_groups    => ($pattern =~ /\(\?</ ? 1 : 0),
 		has_possessive      => ($pattern =~ /(?:[+*?]\+|\{\d+(?:,\d*)?\}\+)/ ? 1 : 0),
 	);
-	
+
 	return {
 		pattern             => $pattern,
 		min_length          => $min_len,
@@ -434,7 +434,6 @@ sub pattern_info {
 	};
 }
 
-# FIXME: min_length can be one too small
 sub _estimate_length {
 	my ($self, $pattern) = @_;
 
@@ -447,15 +446,23 @@ sub _estimate_length {
 	my $max = 0;
 
 	# Simple heuristic - count fixed characters and quantifiers
+	my $last_was_atom = 0;
 	while ($pattern =~ /([^+*?{}\[\]\\])|\\[dwsWDN]|\[([^\]]+)\]|\{(\d+)(?:,(\d+))?\}/g) {
 		if (defined $1 || (defined $2 && $2)) {
-			# Fixed character or character class
 			$min++;
 			$max++;
+			$last_was_atom = 1;
 		} elsif (defined $3) {
-			# Quantifier {n} or {n,m}
-			$min += $3;
-			$max += defined $4 ? $4 : $3;
+			if ($last_was_atom) {
+				# Replace the last atom’s contribution
+				$min += $3 - 1;
+				$max += (defined $4 ? $4 : $3) - 1;
+				$last_was_atom = 0;
+			} else {
+				# No preceding atom? assume standalone
+				$min += $3;
+				$max += defined $4 ? $4 : $3;
+			}
 		}
 	}
 
@@ -990,7 +997,7 @@ Nigel Horne, C<< <njh at nigelhorne.com> >>
 
 =item * L<Regexp::Genex>
 
-=end
+=back
 
 =head1 LICENCE AND COPYRIGHT
 
