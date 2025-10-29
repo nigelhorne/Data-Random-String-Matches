@@ -15,6 +15,8 @@ BEGIN {
 subtest 'set_seed - basic functionality' => sub {
 	my $gen = Data::Random::String::Matches->new(qr/\d{10}/);
 
+	is($gen->get_seed(), undef, 'No seed initially');
+
 	# Set seed and generate
 	$gen->set_seed(12345);
 	my $str1 = $gen->generate();

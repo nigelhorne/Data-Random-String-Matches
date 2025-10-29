@@ -373,6 +373,151 @@ sub set_seed {
 	return $self;
 }
 
+=head2 suggest_simpler_pattern()
+
+Analyzes patterns and suggests improvements.
+
+  my $suggestion = $gen->suggest_simpler_pattern();
+
+  if ($suggestion) {
+    print "Reason: $suggestion->{reason}\n";
+    print "Better pattern: $suggestion->{pattern}\n" if $suggestion->{pattern};
+    print "Tips:\n";
+    print "  - $_\n" for @{$suggestion->{tips}};
+  }
+
+=cut
+
+sub suggest_simpler_pattern {
+	my $self = $_[0];
+
+	my $pattern = $self->{regex_str};
+	my $info = $self->pattern_info();
+
+	# Check for patterns that are too complex
+	if ($info->{complexity} eq 'very_complex') {
+		return {
+			pattern => undef,
+			reason  => 'Pattern is very complex. Consider breaking it into multiple simpler patterns.',
+			tips    => [
+				'Split alternations into separate generators',
+				'Avoid deeply nested groups',
+				'Use fixed-length patterns when possible',
+			],
+		};
+	}
+
+	# Suggest removing unnecessary backreferences
+	if ($info->{features}{has_backreferences} && $pattern =~ /(\(\w+\)).*\\\d+/) {
+		my $simpler = $pattern;
+		# Can't automatically simplify backreferences, but can suggest
+		return {
+			pattern => undef,
+			reason  => 'Backreferences add complexity. Consider if you really need repeated groups.',
+			tips    => [
+				'If the repeated part doesn\'t need to match, use two separate patterns',
+				'For validation, backreferences are great; for generation, they limit variation',
+			],
+		};
+	}
+
+	# Suggest fixed quantifiers instead of ranges
+	if ($pattern =~ /\{(\d+),(\d+)\}/) {
+		my ($min, $max) = ($1, $2);
+		if ($max - $min > 10) {
+			my $mid = int(($min + $max) / 2);
+			my $simpler = $pattern;
+			$simpler =~ s/\{\d+,\d+\}/\{$mid\}/;
+			return {
+				pattern => $simpler,
+				reason  => "Large quantifier range {$min,$max} creates high variability. Consider fixed length {$mid}.",
+				tips    => [
+					'Fixed lengths are faster to generate',
+					'If you need variety, generate multiple patterns with different fixed lengths',
+				],
+			};
+		}
+	}
+
+	# Suggest limiting alternations
+	if ($info->{features}{has_alternation}) {
+		my @alts = split /\|/, $pattern;
+		if (@alts > 10) {
+			return {
+				pattern => undef,
+				reason  => 'Too many alternations (' . scalar(@alts) . '). Consider splitting into multiple patterns.',
+				tips    => [
+					'Create separate generators for different alternatives',
+					'Group similar patterns together',
+					'Use character classes [abc] instead of (a|b|c)',
+				],
+			};
+		}
+
+		# Check if alternations could be a character class
+		if ($pattern =~ /\(([a-zA-Z])\|([a-zA-Z])\|([a-zA-Z])\)/) {
+			my $chars = join('', $1, $2, $3);
+			my $simpler = $pattern;
+			$simpler =~ s/\([a-zA-Z]\|[a-zA-Z]\|[a-zA-Z]\)/[$chars]/;
+			return {
+				pattern => $simpler,
+				reason  => 'Single-character alternations can be simplified to character classes.',
+				tips    => [
+					'Use [abc] instead of (a|b|c)',
+					'Character classes are faster to process',
+				],
+			};
+		}
+	}
+
+	# Suggest removing lookaheads/lookbehinds for generation
+	if ($info->{features}{has_lookahead} || $info->{features}{has_lookbehind}) {
+		my $simpler = $pattern;
+		$simpler =~ s/\(\?[=!].*?\)//g;   # Remove lookaheads
+		$simpler =~ s/\(\?<[=!].*?\)//g;  # Remove lookbehinds
+
+		if ($simpler ne $pattern) {
+			return {
+				pattern => $simpler,
+				reason  => 'Lookaheads/lookbehinds add complexity but don\'t contribute to generated strings.',
+				tips    => [
+					'Lookaheads are great for validation, not generation',
+					'The simplified pattern generates the same strings',
+				],
+			};
+		}
+	}
+
+	# Check for Unicode when ASCII would work
+	if ($info->{features}{has_unicode} && $pattern =~ /\\p\{L\}/) {
+		my $simpler = $pattern;
+		$simpler =~ s/\\p\{L\}/[A-Za-z]/g;
+		return {
+			pattern => $simpler,
+			reason  => 'Unicode \\p{L} can be simplified to [A-Za-z] if you only need ASCII letters.',
+			tips    => [
+				'ASCII patterns are faster',
+				'Only use Unicode if you need non-ASCII characters',
+			],
+		};
+	}
+
+	# Check for overly long fixed strings
+	if ($pattern =~ /([a-zA-Z]{20,})/) {
+		return {
+			pattern => undef,
+			reason  => 'Pattern contains very long fixed literal strings. Consider if you need such specific patterns.',
+			tips    => [
+				'Use variables instead of long literals',
+				'Break into smaller patterns',
+			],
+		};
+	}
+
+	# Pattern seems reasonable
+	return undef;
+}
+
 =head2 validate($string)
 
 Checks if a string matches the pattern without generating.

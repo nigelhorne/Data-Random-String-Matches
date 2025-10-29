@@ -164,6 +164,19 @@ Gets the random seed for reproducible generation
 
 Sets the random seed for reproducible generation
 
+## suggest\_simpler\_pattern()
+
+Analyzes patterns and suggests improvements.
+
+    my $suggestion = $gen->suggest_simpler_pattern();
+
+    if ($suggestion) {
+      print "Reason: $suggestion->{reason}\n";
+      print "Better pattern: $suggestion->{pattern}\n" if $suggestion->{pattern};
+      print "Tips:\n";
+      print "  - $_\n" for @{$suggestion->{tips}};
+    }
+
 ## validate($string)
 
 Checks if a string matches the pattern without generating.
