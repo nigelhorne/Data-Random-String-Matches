@@ -16,16 +16,16 @@ bulk generation of random strings.
 =cut
 
 print "\n";
-print "=" x 70, "\n";
+print '=' x 70, "\n";
 print "BULK GENERATION EXAMPLES\n";
-print "=" x 70, "\n\n";
+print '=' x 70, "\n\n";
 
 # ===========================================================================
 # EXAMPLE 1: Database Seeding
 # ===========================================================================
 
 print "EXAMPLE 1: Database Seeding\n";
-print "-" x 70, "\n\n";
+print '-' x 70, "\n\n";
 
 {
 	print "Generating 1000 product codes for database seeding...\n";
@@ -358,7 +358,5 @@ Bulk generation is faster than individual calls:
 =head1 SEE ALSO
 
 L<Data::Random::String::Matches>
-
-L<docs/generate_many.md> for detailed documentation
 
 =cut

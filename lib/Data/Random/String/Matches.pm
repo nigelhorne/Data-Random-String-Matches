@@ -223,7 +223,7 @@ sub generate {
 
 	# If smart approach failed, show warning in debug mode
 	if ($ENV{DEBUG_REGEX_GEN} && $@) {
-		warn "Smart generation failed: $@\n";
+		warn "Smart generation failed: $@";
 	}
 
 	# Fall back to brute force with character set matching
