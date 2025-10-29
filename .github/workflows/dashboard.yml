@@ -35,6 +35,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get -y upgrade
+          sudo ntpdate -u pool.ntp.org
         if: runner.os == 'Linux'
 
       # Install module dependencies (from cpanfile or manually)
@@ -94,13 +95,11 @@ jobs:
           # ls -t coverage_history/*.json | tail -n +31 | xargs rm -f
 
       - name: Commit coverage snapshot
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "github-actions@github.com"
-          git add coverage_history/
-          git commit -m "Add coverage snapshot for $TIMESTAMP ($SHA)" || echo "No changes to commit"
-          git pull --rebase
-          git push origin HEAD:${{ github.ref_name }}
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: GitHub Actions
+          author_email: github-actions@github.com
+          message: "Add coverage snapshot for ${{ steps.timestamp.outputs.date }} (${{ steps.sha.outputs.short }})"
 
       # Deploy HTML report to GitHub Pages
       - name: Publish coverage report
