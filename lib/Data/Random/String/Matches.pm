@@ -146,22 +146,6 @@ a wide range of regex features.
 
 =over 4
 
-=item * Lookaheads and lookbehinds are not supported
-
-=item * Named groups are not supported
-
-=item * Possessive quantifiers (C<*+>, C<++>) are not supported
-
-=item * Unicode properties (C<\p{}>) are not supported
-
-=item * Some complex nested patterns may not work correctly
-
-=back
-
-=head1 LIMITATIONS
-
-=over 4
-
 =item * Lookaheads and lookbehinds ((?=...), (?!...)) are not supported
 
 =item * Named groups ((?<name>...)) are not supported
@@ -413,9 +397,11 @@ Finally, it calculates a rough "complexity" classification based on pattern leng
 =cut
 
 sub pattern_info {
-	my ($self) = @_;
+	my $self = $_[0];
 
-	my $pattern = $self->{regex_str};
+	return $self->{'_pattern_info_cache'} if $self->{'_pattern_info_cache'};
+
+	my $pattern = $self->{'regex_str'};
 
 	# Calculate approximate min/max lengths
 	my ($min_len, $max_len) = $self->_estimate_length($pattern);
@@ -431,7 +417,7 @@ sub pattern_info {
 		has_possessive      => ($pattern =~ /(?:[+*?]\+|\{\d+(?:,\d*)?\}\+)/ ? 1 : 0),
 	);
 
-	return {
+	my $info = {
 		pattern             => $pattern,
 		min_length          => $min_len,
 		max_length          => $max_len,
@@ -439,6 +425,10 @@ sub pattern_info {
 		features            => \%features,
 		complexity          => $self->_calculate_complexity(\%features, $pattern),
 	};
+
+	$self->{'_pattern_info_cache'} = $info;
+
+	return $info;
 }
 
 sub _estimate_length {
@@ -453,7 +443,7 @@ sub _estimate_length {
 	my $max = 0;
 
 	# Simple heuristic - count fixed characters and quantifiers
-	my $last_was_atom = 0;
+	my $last_was_atom = 0;	# Handle cases like \d{3} where the quantifier modifies the atom count
 	while ($pattern =~ /([^+*?{}\[\]\\])|\\[dwsWDN]|\[([^\]]+)\]|\{(\d+)(?:,(\d+))?\}/g) {
 		if (defined $1 || (defined $2 && $2)) {
 			$min++;
@@ -581,11 +571,11 @@ sub _parse_sequence {
 				my ($generated, $new_i) = $self->_handle_quantifier($pattern, $i, sub {
 					my @chars = ('a'..'z', 'A'..'Z', '0'..'9', '_');
 					$chars[int(rand(@chars))];
-				});
+				}, 1);
 				$result .= $generated;
 				$i = $new_i;
 			} elsif ($next eq 's') {
-				my ($generated, $new_i) = $self->_handle_quantifier($pattern, $i, sub { ' ' });
+				my ($generated, $new_i) = $self->_handle_quantifier($pattern, $i, sub { ' ' }, 1);
 				$result .= $generated;
 				$i = $new_i;
 			} elsif ($next eq 'D') {
@@ -756,7 +746,7 @@ sub _handle_quantifier {
 
 	if ($next eq '{') {
 		my $end = index($pattern, '}', $pos + 2);
-		croak "Unmatched '}'" if ($end == -1);
+		croak "Unmatched '{' at position $pos in pattern: $pattern" if ($end == -1);
 		my $quant = substr($pattern, $pos + 2, $end - $pos - 2);
 
 		# Check for possessive after }
@@ -949,7 +939,7 @@ sub _unicode_property_chars {
 		return ('0' .. '9');
 	} elsif ($prop eq 'Lu' || $prop eq 'Uppercase_Letter') {
 		# Uppercase letters, skip × which is not a letter
-		return ('A' .. 'Z', map { chr($_) } (ord('À') .. ord('Ö'), ord('ø') .. ord('Þ')));
+		return ('A' .. 'Z', map { chr($_) } (ord('À') .. ord('Ö'), ord('Ø') .. ord('Þ')));
 	} elsif ($prop eq 'Ll' || $prop eq 'Lowercase_Letter') {
 		# Lowercase letters, skip ÷ which is not a letter
 		return ('a' .. 'z', map { chr($_) } (ord('à') .. ord('ö'), ord('ø') .. ord('ÿ')));

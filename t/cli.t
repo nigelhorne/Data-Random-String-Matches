@@ -76,6 +76,10 @@ subtest 'Help option' => sub {
 
 	like($result->{stdout}, qr/Usage:/, 'Shows usage');
 	like($result->{stdout}, qr/Options:/, 'Shows options');
+
+	$result = run_cli();
+
+	like($result->{stdout}, qr/Usage:/, 'No args shows usage');
 };
 
 # Test version option
@@ -83,6 +87,15 @@ subtest 'Version option' => sub {
 	my $result = run_cli('--version');
 
 	like($result->{stdout}, qr/random-string version/, 'Shows version');
+	is($result->{exit}, 0, 'Exits successfully');
+};
+
+# Test man option
+subtest 'Man option' => sub {
+	my $result = run_cli('--man');
+
+	like($result->{stdout}, qr/NAME/, 'Shows man page');
+	like($result->{stdout}, qr/SYNOPSIS/, 'Shows man page');
 	is($result->{exit}, 0, 'Exits successfully');
 };
 
@@ -179,6 +192,12 @@ subtest 'Separator escape sequences' => sub {
 	my $result = run_cli('-c', '2', '-S', '\t', 'X');
 
 	like($result->{stdout}, qr/X\tX/, 'Tab separator works');
+};
+
+subtest 'Bad pattern errors' => sub {
+	my $result = run_cli('{');
+
+	isnt($result->{exit}, 0, 'Exits failure with bad arg');
 };
 
 done_testing();

@@ -93,14 +93,6 @@ a wide range of regex features.
 
 # LIMITATIONS
 
-- Lookaheads and lookbehinds are not supported
-- Named groups are not supported
-- Possessive quantifiers (`*+`, `++`) are not supported
-- Unicode properties (`\p{}`) are not supported
-- Some complex nested patterns may not work correctly
-
-# LIMITATIONS
-
 - Lookaheads and lookbehinds ((?=...), (?!...)) are not supported
 - Named groups ((?&lt;name>...)) are not supported
 - Possessive quantifiers (\*+, ++) are not supported

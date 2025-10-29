@@ -168,12 +168,15 @@ subtest 'pattern_info - basic structure' => sub {
 
 subtest 'pattern_info - simple pattern' => sub {
 	my $gen = Data::Random::String::Matches->new(qr/\d{4}/);
-	my $info = $gen->pattern_info();
 
-	is($info->{pattern}, '(?^:\d{4})', 'Pattern stored correctly');
-	cmp_ok($info->{min_length}, '>=', 4, 'Min length reasonable');
-	ok($info->{max_length} >= 4, 'Max length reasonable');
-	is($info->{complexity}, 'simple', 'Simple pattern detected');
+	for(1..3) {	# Verify the internal caching
+		my $info = $gen->pattern_info();
+
+		is($info->{pattern}, '(?^:\d{4})', 'Pattern stored correctly');
+		cmp_ok($info->{min_length}, '>=', 4, 'Min length reasonable');
+		ok($info->{max_length} >= 4, 'Max length reasonable');
+		is($info->{complexity}, 'simple', 'Simple pattern detected');
+	}
 };
 
 subtest 'pattern_info - features detection' => sub {
