@@ -1032,6 +1032,11 @@ sub _random_from_class {
 
 	my @chars;
 
+	# Debugging this regex: qr/!#-'*+\\-\\.\\^_`|~0-9A-Za-z/
+	# which gives this error: 'Argument "#" isn't numeric in range (or flop)'
+	# DEBUG
+	warn "DEBUG: class = '$class', length = ", length($class);
+
 	# Handle negation
 	my $negate = 0;
 	if (substr($class, 0, 1) eq '^') {
@@ -1044,9 +1049,13 @@ sub _random_from_class {
 	while ($i < length($class)) {
 		my $char = substr($class, $i, 1);
 
+		# DEBUG
+		warn "DEBUG: i=$i, char='$char' (ord=", ord($char), ')';
+
 		if ($char eq '\\') {
 			$i++;
 			my $next = substr($class, $i, 1);
+			warn "DEBUG: Escaped char: $next";
 			if ($next eq 'd') {
 				push @chars, ('0'..'9');
 			} elsif ($next eq 'w') {
@@ -1060,18 +1069,35 @@ sub _random_from_class {
 				push @chars, $self->_unicode_property_chars($prop);
 				$i = $end;
 			} else {
+				# Escaped literal character (including \-, \., \^, etc.)
 				push @chars, $next;
 			}
-		} elsif ($i + 2 < length($class) && substr($class, $i+1, 1) eq '-') {
-			# Range
-			my $end = substr($class, $i+2, 1);
-			push @chars, ($char .. $end);
-			$i += 2;	# Will be incremented again by loop, total +3
+		} elsif ($i + 2 < length($class) && substr($class, $i+1, 1) eq '-' && substr($class, $i+2, 1) ne ']') {
+			# Range (but not if - is at end or before ])
+			my $next_char = substr($class, $i+1, 1);	# Potential range
+			my $end_char = substr($class, $i+2, 1);
+			
+			warn "DEBUG: Potential range: '$char' - '$end_char'";
+			
+			# Skip if end_char is a backslash (escaped char follows)
+			if ($end_char eq '\\') {
+				push @chars, $char;
+			} elsif (ord($end_char) >= ord($char)) {
+				# Valid range
+				warn "DEBUG: Valid range from ", ord($char), ' to ', ord($end_char);
+				push @chars, ($char .. $end_char);
+				$i += 2;  # Will be incremented again by loop, total +3
+			} else {
+				# Invalid range, treat as literals
+				push @chars, $char;
+			}
 		} else {
 			push @chars, $char;
 		}
 		$i++;
 	}
+
+	warn 'DEBUG: Final chars array has ', scalar(@chars), ' elements';
 
 	if ($negate) {
 		my %excluded = map { $_ => 1 } @chars;
