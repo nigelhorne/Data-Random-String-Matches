@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+# RFC6265 test (cookie names)
+
 use strict;
 use warnings;
 use Test::More;
