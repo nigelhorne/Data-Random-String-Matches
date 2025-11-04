@@ -8,7 +8,7 @@ use Data::Random::String::Matches;
 
 Run this script to see examples of various patterns:
 
-    perl examples/cookbook.pl
+    perl examples/cookbook
 
 Or use individual patterns in your own code:
 
@@ -47,7 +47,7 @@ Generate:
 
 =head1 NAME
 
-cookbook.pl - Examples and recipes for Data::Random::String::Matches
+cookbook - Examples and recipes for Data::Random::String::Matches
 
 =head1 DESCRIPTION
 

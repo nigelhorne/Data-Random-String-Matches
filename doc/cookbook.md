@@ -509,7 +509,7 @@ Use this template to build your own patterns:
 
 ## See Also
 
-- [Cookbook](cookbook.pl) - Working examples
+- [Cookbook](cookbook) - Working examples
 - [Module Documentation](../lib/Data/Random/String/Matches.pm)
 - [README](../README.md)
 
