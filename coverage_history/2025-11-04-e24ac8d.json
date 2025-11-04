@@ -1,0 +1,710 @@
+{
+   "runs" : [
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221795.59808,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221795.59759,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221795.76898,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221795.76863,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221795.93991,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221795.93948,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221796.10748,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221796.10709,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221796.27249,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221796.27226,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221796.44077,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221796.44053,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221796.60817,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221796.60789,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221796.77477,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221796.77453,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221796.95708,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221796.94639,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221797.18409,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221797.18351,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221797.40801,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221797.40752,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221814.09557,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221797.60792,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221797.75362,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "-e",
+         "start" : 1762221797.75351,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221798.06392,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/30-basics.t",
+         "start" : 1762221798.01644,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221798.56131,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/40-advanced.t",
+         "start" : 1762221798.50377,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221799.07028,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/advanced-features.t",
+         "start" : 1762221799.01097,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221799.58558,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/advanced_regex.t",
+         "start" : 1762221799.52458,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221809.10407,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/cli.t",
+         "start" : 1762221800.06027,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221800.24483,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221800.24413,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221800.61278,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221800.61189,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221800.99281,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221800.99166,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221801.38085,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221801.37978,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221801.77602,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221801.76332,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221802.16606,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221802.15342,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221802.54748,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221802.54693,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221803.16946,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221802.93381,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221803.13032,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "/opt/hostedtoolcache/perl/5.40.3/x64/bin/perldoc",
+         "start" : 1762221803.09142,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221803.55505,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221803.55448,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221803.94912,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221803.93661,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221804.32441,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221804.32352,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221804.69538,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221804.69434,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221805.06505,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221805.06428,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221805.43842,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221805.43674,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221805.8098,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221805.80815,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221806.18994,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221806.189,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221806.57355,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221806.57254,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221806.95016,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221806.94928,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221807.32294,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221807.32225,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221807.69746,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221807.69672,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221808.07884,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221808.07789,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221808.45664,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221808.45581,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221808.91494,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "bin/random-string",
+         "start" : 1762221808.83259,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221809.38699,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/comment-spelling.t",
+         "start" : 1762221809.38669,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221809.62833,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/eof.t",
+         "start" : 1762221809.62804,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221809.87255,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/eol.t",
+         "start" : 1762221809.87227,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221811.25623,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/generate-many.t",
+         "start" : 1762221810.14023,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221811.71962,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/generate.t",
+         "start" : 1762221811.7078,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221812.11365,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/pod-cm.t",
+         "start" : 1762221812.11338,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221812.34976,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/pod-synopsis.t",
+         "start" : 1762221812.34951,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221812.5881,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/pod.t",
+         "start" : 1762221812.58781,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221812.90036,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/release04.t",
+         "start" : 1762221812.84127,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221813.36113,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/suggest.t",
+         "start" : 1762221813.33364,
+         "version" : "0.04"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Generate random strings matching a regex",
+         "dir" : "/home/runner/work/Data-Random-String-Matches/Data-Random-String-Matches",
+         "finish" : 1762221813.85714,
+         "name" : "Data-Random-String-Matches",
+         "perl" : "5.40.3",
+         "run" : "t/utility_methods.t",
+         "start" : 1762221813.78781,
+         "version" : "0.04"
+      }
+   ],
+   "summary" : {
+      "/opt/hostedtoolcache/perl/5.40.3/x64/bin/perldoc" : {
+         "branch" : {
+            "covered" : 2,
+            "error" : 2,
+            "percentage" : 50,
+            "total" : 4,
+            "uncoverable" : 0
+         },
+         "statement" : {
+            "covered" : 8,
+            "percentage" : 100,
+            "total" : 8
+         },
+         "subroutine" : {
+            "covered" : 2,
+            "percentage" : 100,
+            "total" : 2
+         },
+         "total" : {
+            "covered" : 12,
+            "error" : 2,
+            "percentage" : 85.7142857142857,
+            "total" : 14,
+            "uncoverable" : 0
+         }
+      },
+      "Total" : {
+         "branch" : {
+            "covered" : 247,
+            "error" : 47,
+            "percentage" : 84.0136054421769,
+            "total" : 294,
+            "uncoverable" : 0
+         },
+         "condition" : {
+            "covered" : 77,
+            "error" : 46,
+            "percentage" : 62.6016260162602,
+            "total" : 123,
+            "uncoverable" : 0
+         },
+         "statement" : {
+            "covered" : 479,
+            "error" : 25,
+            "percentage" : 95.0396825396825,
+            "total" : 504
+         },
+         "subroutine" : {
+            "covered" : 46,
+            "percentage" : 100,
+            "total" : 46
+         },
+         "total" : {
+            "covered" : 849,
+            "error" : 118,
+            "percentage" : 87.7973112719752,
+            "total" : 967,
+            "uncoverable" : 0
+         }
+      },
+      "bin/random-string" : {
+         "branch" : {
+            "covered" : 20,
+            "error" : 2,
+            "percentage" : 90.9090909090909,
+            "total" : 22,
+            "uncoverable" : 0
+         },
+         "statement" : {
+            "covered" : 50,
+            "error" : 1,
+            "percentage" : 98.0392156862745,
+            "total" : 51
+         },
+         "subroutine" : {
+            "covered" : 6,
+            "percentage" : 100,
+            "total" : 6
+         },
+         "total" : {
+            "covered" : 76,
+            "error" : 3,
+            "percentage" : 96.2025316455696,
+            "total" : 79,
+            "uncoverable" : 0
+         }
+      },
+      "blib/lib/Data/Random/String/Matches.pm" : {
+         "branch" : {
+            "covered" : 225,
+            "error" : 43,
+            "percentage" : 83.955223880597,
+            "total" : 268,
+            "uncoverable" : 0
+         },
+         "condition" : {
+            "covered" : 77,
+            "error" : 46,
+            "percentage" : 62.6016260162602,
+            "total" : 123,
+            "uncoverable" : 0
+         },
+         "statement" : {
+            "covered" : 421,
+            "error" : 24,
+            "percentage" : 94.6067415730337,
+            "total" : 445
+         },
+         "subroutine" : {
+            "covered" : 38,
+            "percentage" : 100,
+            "total" : 38
+         },
+         "total" : {
+            "covered" : 761,
+            "error" : 113,
+            "percentage" : 87.070938215103,
+            "total" : 874,
+            "uncoverable" : 0
+         }
+      }
+   }
+}
