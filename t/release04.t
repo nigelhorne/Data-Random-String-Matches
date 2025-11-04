@@ -38,7 +38,7 @@ subtest 'Character class with single quotes in range' => sub {
 			# Valid ranges: ! (33), #-' (35-39), * (42), + (43), - (45), . (46),
 			# ^ (94), _ (95), ` (96), | (124), ~ (126), 0-9 (48-57), A-Z (65-90), a-z (97-122)
 			ok(
-				$char =~ /[!#-'*+\-\.\^_`|~0-9A-Za-z]/,
+				$char =~ /[!#-'*+\\\-\.\^_`|~0-9A-Za-z]/,
 				"Character '$char' (ord $ord) is valid"
 			);
 		}
