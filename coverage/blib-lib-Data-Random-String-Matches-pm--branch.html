@@ -20,7 +20,7 @@ https://pjcj.net
 <h1>Branch Coverage</h1>
 <table>
 <tr><td class="h" align="right">File:</td><td align="left">blib/lib/Data/Random/String/Matches.pm</td></tr>
-<tr><td class="h" align="right">Coverage:</td><td align="left" class="c1">84.8%</td></tr>
+<tr><td class="h" align="right">Coverage:</td><td align="left" class="c1">83.6%</td></tr>
 </table>
 <div><br/></div>
 <table>
@@ -123,7 +123,7 @@ https://pjcj.net
 <tr><td class="h"><a id="L936">936</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($is_possessive)</td></tr>
 <tr><td class="h"><a id="L946">946</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($is_possessive)</td></tr>
 <tr><td class="h"><a id="L956">956</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($is_possessive)</td></tr>
-<tr><td class="h"><a id="L959">959</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">rand() &lt; 0.5 ? :</td></tr>
+<tr><td class="h"><a id="L959">959</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">rand() &lt; 0.5 ? :</td></tr>
 <tr><td class="h"><a id="L976">976</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($char eq &#39;(&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char eq &#39;)&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char eq &#39;|&#39; and $depth == 0) { }</td></tr>
@@ -135,17 +135,23 @@ https://pjcj.net
 <tr><td class="h"><a id="L1020">1020</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($char eq &#39;(&#39; and $prev ne &#39;\\&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char eq &#39;)&#39; and $prev ne &#39;\\&#39;) { }</td></tr>
 <tr><td class="h"><a id="L1024">1024</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if $depth == 0</td></tr>
-<tr><td class="h"><a id="L1037">1037</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if (substr($class, 0, 1) eq &quot;^&quot;)</td></tr>
-<tr><td class="h"><a id="L1047">1047</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($char eq &#39;\\&#39;) { }</td></tr>
+<tr><td class="h"><a id="L1037">1037</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if $ENV{&#39;DEBUG_REGEX_GEN&#39;}</td></tr>
+<tr><td class="h"><a id="L1041">1041</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if (substr($class, 0, 1) eq &quot;^&quot;)</td></tr>
+<tr><td class="h"><a id="L1051">1051</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if $ENV{&#39;DEBUG_REGEX_GEN&#39;}</td></tr>
+<tr><td class="h"><a id="L1053">1053</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($char eq &#39;\\&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($i + 2 &lt; length $class and substr($class, $i + 1, 1) eq &#39;-&#39;) { }</td></tr>
-<tr><td class="h"><a id="L1050">1050</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($next eq &#39;d&#39;) { }</td></tr>
+<tr><td class="h"><a id="L1056">1056</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if $ENV{&#39;DEBUG_REGEX_GEN&#39;}</td></tr>
+<tr><td class="h"><a id="L1057">1057</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($next eq &#39;d&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($next eq &#39;w&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">elsif ($next eq &#39;s&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">elsif ($next eq &#39;p&#39; and substr($class, $i + 1, 1) eq &#39;{&#39;) { }</td></tr>
-<tr><td class="h"><a id="L1076">1076</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($negate)</td></tr>
-<tr><td class="h"><a id="L1081">1081</a></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">@chars ? :</td></tr>
-<tr><td class="h"><a id="L1087">1087</a></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">@chars ? :</td></tr>
-<tr><td class="h"><a id="L1094">1094</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($prop eq &#39;L&#39; or $prop eq &#39;Letter&#39;) { }</td></tr>
+<tr><td class="h"><a id="L1078">1078</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if ($end_char eq &#39;\\&#39; or $end_char eq &#39;]&#39;) { }</td></tr>
+<tr><td class="h"></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">elsif (ord $end_char &gt;= ord $char) { }</td></tr>
+<tr><td class="h"><a id="L1097">1097</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if $ENV{&#39;DEBUG_REGEX_GEN&#39;}</td></tr>
+<tr><td class="h"><a id="L1099">1099</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($negate)</td></tr>
+<tr><td class="h"><a id="L1104">1104</a></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">@chars ? :</td></tr>
+<tr><td class="h"><a id="L1110">1110</a></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">@chars ? :</td></tr>
+<tr><td class="h"><a id="L1117">1117</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($prop eq &#39;L&#39; or $prop eq &#39;Letter&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($prop eq &#39;N&#39; or $prop eq &#39;Number&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($prop eq &#39;Lu&#39; or $prop eq &#39;Uppercase_Letter&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">elsif ($prop eq &#39;Ll&#39; or $prop eq &#39;Lowercase_Letter&#39;) { }</td></tr>
