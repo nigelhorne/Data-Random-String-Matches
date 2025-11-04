@@ -9,7 +9,7 @@ use Carp qw(carp croak);
 use Params::Get;
 use utf8;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 NAME
 
