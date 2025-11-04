@@ -1073,7 +1073,7 @@ sub _random_from_class {
 		} elsif ($i + 2 < length($class) && substr($class, $i+1, 1) eq '-') {
 			# Potential range
 			my $end_char = substr($class, $i+2, 1);
-			
+
 			# Check if end is escaped or if this is valid range
 			if ($end_char eq '\\' || $end_char eq ']') {
 				# Not a range, dash is literal
