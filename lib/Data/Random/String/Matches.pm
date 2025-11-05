@@ -1,6 +1,6 @@
 package Data::Random::String::Matches;
 
-use 5.010;
+use 5.014;
 
 use strict;
 use warnings;
@@ -193,7 +193,7 @@ sub new {
 		regex	 => $regex_obj,
 		regex_str => "$regex",
 		length	=> $length || 10,
-		backrefs	=> {},  # Store backreferences
+		backrefs	=> {},	# Store backreferences
 		named_refs => {},	 # Store named captures
 	};
 

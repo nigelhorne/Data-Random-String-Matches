@@ -73,5 +73,5 @@ WriteMakefile(
 			}
 		},
 	},
-	MIN_PERL_VERSION	=> '5.010'
+	MIN_PERL_VERSION	=> '5.014'
 );
