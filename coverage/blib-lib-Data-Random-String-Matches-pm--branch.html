@@ -20,44 +20,44 @@ https://pjcj.net
 <h1>Branch Coverage</h1>
 <table>
 <tr><td class="h" align="right">File:</td><td align="left">blib/lib/Data/Random/String/Matches.pm</td></tr>
-<tr><td class="h" align="right">Coverage:</td><td align="left" class="c1">84.0%</td></tr>
+<tr><td class="h" align="right">Coverage:</td><td align="left" class="c1">83.6%</td></tr>
 </table>
 <div><br/></div>
 <table>
 <tr><th>line</th><th>%</th><th colspan="2">coverage</th><th>branch</th></tr>
 <tr><td class="h"><a id="L187">187</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">unless defined $regex</td></tr>
 <tr><td class="h"><a id="L190">190</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">ref $regex eq &#39;Regexp&#39; ? :</td></tr>
-<tr><td class="h"><a id="L220">220</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if (defined $str and $str =~ /^$regex$/)</td></tr>
+<tr><td class="h"><a id="L220">220</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if (defined $str and $str =~ /^$regex$/u)</td></tr>
 <tr><td class="h"><a id="L225">225</a></td><td class="c0">0</td><td class="c0">T</td><td class="c0">F</td><td class="s">if ($ENV{&#39;DEBUG_REGEX_GEN&#39;} and $@)</td></tr>
-<tr><td class="h"><a id="L232">232</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if $str =~ /^$regex$/</td></tr>
-<tr><td class="h"><a id="L246">246</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if ($regex_str =~ /\\d/ or $regex_str =~ /\[0-9\]/ or $regex_str =~ /\[\^[^\]]*[A-Za-z]/) { }</td></tr>
-<tr><td class="h"></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">elsif ($regex_str =~ /\[A-Z\]/ or $regex_str =~ /\[A-Z[^\]]*\]/) { }</td></tr>
-<tr><td class="h"></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">elsif ($regex_str =~ /\[a-z\]/ or $regex_str =~ /\[a-z[^\]]*\]/) { }</td></tr>
-<tr><td class="h"></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">elsif ($regex_str =~ /\\w/ or $regex_str =~ /\[a-zA-Z0-9_\]/) { }</td></tr>
+<tr><td class="h"><a id="L232">232</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if $str =~ /^$regex$/u</td></tr>
+<tr><td class="h"><a id="L246">246</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if ($regex_str =~ /\\d/u or $regex_str =~ /\[0-9\]/u or $regex_str =~ /\[\^[^\]]*[A-Za-z]/u) { }</td></tr>
+<tr><td class="h"></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">elsif ($regex_str =~ /\[A-Z\]/u or $regex_str =~ /\[A-Z[^\]]*\]/u) { }</td></tr>
+<tr><td class="h"></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">elsif ($regex_str =~ /\[a-z\]/u or $regex_str =~ /\[a-z[^\]]*\]/u) { }</td></tr>
+<tr><td class="h"></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">elsif ($regex_str =~ /\\w/u or $regex_str =~ /\[a-zA-Z0-9_\]/u) { }</td></tr>
 <tr><td class="h"><a id="L316">316</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">unless defined $count and $count &gt; 0</td></tr>
 <tr><td class="h"><a id="L320">320</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($unique) { }</td></tr>
 <tr><td class="h"><a id="L332">332</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if (keys %seen &lt; $count)</td></tr>
 <tr><td class="h"><a id="L368">368</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">unless defined $seed</td></tr>
 <tr><td class="h"><a id="L398">398</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($info-&gt;{&#39;complexity&#39;} eq &quot;very_complex&quot;)</td></tr>
-<tr><td class="h"><a id="L411">411</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if ($info-&gt;{&#39;features&#39;}{&#39;has_backreferences&#39;} and $pattern =~ /(\(\w+\)).*\\\d+/)</td></tr>
-<tr><td class="h"><a id="L425">425</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($pattern =~ /\{(\d+),(\d+)\}/)</td></tr>
+<tr><td class="h"><a id="L411">411</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if ($info-&gt;{&#39;features&#39;}{&#39;has_backreferences&#39;} and $pattern =~ /(\(\w+\)).*\\\d+/u)</td></tr>
+<tr><td class="h"><a id="L425">425</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($pattern =~ /\{(\d+),(\d+)\}/u)</td></tr>
 <tr><td class="h"><a id="L427">427</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($max - $min &gt; 10)</td></tr>
 <tr><td class="h"><a id="L443">443</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($info-&gt;{&#39;features&#39;}{&#39;has_alternation&#39;})</td></tr>
 <tr><td class="h"><a id="L445">445</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if (@alts &gt; 10)</td></tr>
-<tr><td class="h"><a id="L458">458</a></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">if ($pattern =~ /\(([a-zA-Z])\|([a-zA-Z])\|([a-zA-Z])\)/)</td></tr>
+<tr><td class="h"><a id="L458">458</a></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">if ($pattern =~ /\(([a-zA-Z])\|([a-zA-Z])\|([a-zA-Z])\)/u)</td></tr>
 <tr><td class="h"><a id="L474">474</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($info-&gt;{&#39;features&#39;}{&#39;has_lookahead&#39;} or $info-&gt;{&#39;features&#39;}{&#39;has_lookbehind&#39;})</td></tr>
 <tr><td class="h"><a id="L479">479</a></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">if ($simpler ne $pattern)</td></tr>
-<tr><td class="h"><a id="L492">492</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($info-&gt;{&#39;features&#39;}{&#39;has_unicode&#39;} and $pattern =~ /\\p\{L\}/)</td></tr>
-<tr><td class="h"><a id="L506">506</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if ($pattern =~ /([a-zA-Z]{20,})/)</td></tr>
+<tr><td class="h"><a id="L492">492</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($info-&gt;{&#39;features&#39;}{&#39;has_unicode&#39;} and $pattern =~ /\\p\{L\}/u)</td></tr>
+<tr><td class="h"><a id="L506">506</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if ($pattern =~ /([a-zA-Z]{20,})/u)</td></tr>
 <tr><td class="h"><a id="L536">536</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">unless defined $string</td></tr>
 <tr><td class="h"><a id="L563">563</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if $self-&gt;{&#39;_pattern_info_cache&#39;}</td></tr>
-<tr><td class="h"><a id="L571">571</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /\|/ ? :</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /(\\[1-9]|\\k&lt;)/ ? :</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /\\p\{/ ? :</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /\(\?[=!]/ ? :</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /\(\?&lt;[=!]/ ? :</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /\(\?&lt;/ ? :</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /(?:[+*?]\+|\{\d+(?:,\d*)?\}\+)/ ? :</td></tr>
+<tr><td class="h"><a id="L571">571</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /\|/u ? :</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /(\\[1-9]|\\k&lt;)/u ? :</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /\\p\{/u ? :</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /\(\?[=!]/u ? :</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /\(\?&lt;[=!]/u ? :</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /\(\?&lt;/u ? :</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">$pattern =~ /(?:[+*?]\+|\{\d+(?:,\d*)?\}\+)/u ? :</td></tr>
 <tr><td class="h"><a id="L609">609</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if (defined $1 or defined $2 and $2) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif (defined $3) { }</td></tr>
 <tr><td class="h"><a id="L614">614</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($last_was_atom) { }</td></tr>
@@ -80,9 +80,9 @@ https://pjcj.net
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char eq &#39;(&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char eq &#39;.&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">elsif ($char eq &#39;|&#39;) { }</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char =~ /[+*?]/ or $char eq &#39;{&#39;) { }</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char =~ /[\w ]/) { }</td></tr>
-<tr><td class="h"><a id="L700">700</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($next =~ /[1-9]/) { }</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char =~ /[+*?]/u or $char eq &#39;{&#39;) { }</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char =~ /[\w ]/u) { }</td></tr>
+<tr><td class="h"><a id="L700">700</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($next =~ /[1-9]/u) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($next eq &#39;k&#39; and substr($pattern, $i + 1, 1) eq &#39;&lt;&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($next eq &#39;p&#39; and substr($pattern, $i + 1, 1) eq &#39;{&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($next eq &#39;d&#39;) { }</td></tr>
@@ -97,33 +97,33 @@ https://pjcj.net
 <tr><td class="h"><a id="L712">712</a></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">if (exists $self-&gt;{&#39;named_refs&#39;}{$name}) { }</td></tr>
 <tr><td class="h"><a id="L769">769</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if $end == -1</td></tr>
 <tr><td class="h"><a id="L780">780</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if $end == -1</td></tr>
-<tr><td class="h"><a id="L791">791</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($group_content =~ /^\?:/) { }</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($group_content =~ /^\?&lt;([^&gt;]+)&gt;/) { }</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($group_content =~ /^\?=/) { }</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($group_content =~ /^\?!/) { }</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($group_content =~ /^\?&lt;=/) { }</td></tr>
-<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($group_content =~ /^\?&lt;!/) { }</td></tr>
+<tr><td class="h"><a id="L791">791</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($group_content =~ /^\?:/u) { }</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($group_content =~ /^\?&lt;([^&gt;]+)&gt;/u) { }</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($group_content =~ /^\?=/u) { }</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($group_content =~ /^\?!/u) { }</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($group_content =~ /^\?&lt;=/u) { }</td></tr>
+<tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($group_content =~ /^\?&lt;!/u) { }</td></tr>
 <tr><td class="h"><a id="L824">824</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($is_lookahead) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($is_lookbehind) { }</td></tr>
 <tr><td class="h"><a id="L827">827</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">unless ($is_negative)</td></tr>
-<tr><td class="h"><a id="L843">843</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($group_content =~ /\|/) { }</td></tr>
+<tr><td class="h"><a id="L843">843</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($group_content =~ /\|/u) { }</td></tr>
 <tr><td class="h"><a id="L850">850</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($is_capturing)</td></tr>
 <tr><td class="h"><a id="L854">854</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if (defined $group_name)</td></tr>
 <tr><td class="h"><a id="L901">901</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($check_possessive and $pos + 2 &lt; length $pattern)</td></tr>
-<tr><td class="h"><a id="L903">903</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($next =~ /[+*?]/ || $next eq &#39;}&#39; and $after_next eq &quot;+&quot;)</td></tr>
+<tr><td class="h"><a id="L903">903</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($next =~ /[+*?]/u || $next eq &#39;}&#39; and $after_next eq &quot;+&quot;)</td></tr>
 <tr><td class="h"><a id="L908">908</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($next eq &#39;{&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($next eq &#39;+&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($next eq &#39;*&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($next eq &#39;?&#39;) { }</td></tr>
 <tr><td class="h"><a id="L910">910</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">if $end == -1</td></tr>
 <tr><td class="h"><a id="L914">914</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($check_possessive and $end + 1 &lt; length $pattern and substr($pattern, $end + 1, 1) eq &quot;+&quot;)</td></tr>
-<tr><td class="h"><a id="L920">920</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($quant =~ /^(\d+)$/) { }</td></tr>
-<tr><td class="h"></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">elsif ($quant =~ /^(\d+),(\d+)$/) { }</td></tr>
-<tr><td class="h"></td><td class="c0">0</td><td class="c0">T</td><td class="c0">F</td><td class="s">elsif ($quant =~ /^(\d+),$/) { }</td></tr>
+<tr><td class="h"><a id="L920">920</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($quant =~ /^(\d+)$/u) { }</td></tr>
+<tr><td class="h"></td><td class="c0">50</td><td class="c3">T</td><td class="c0">F</td><td class="s">elsif ($quant =~ /^(\d+),(\d+)$/u) { }</td></tr>
+<tr><td class="h"></td><td class="c0">0</td><td class="c0">T</td><td class="c0">F</td><td class="s">elsif ($quant =~ /^(\d+),$/u) { }</td></tr>
 <tr><td class="h"><a id="L936">936</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($is_possessive)</td></tr>
 <tr><td class="h"><a id="L946">946</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($is_possessive)</td></tr>
 <tr><td class="h"><a id="L956">956</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($is_possessive)</td></tr>
-<tr><td class="h"><a id="L959">959</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">rand() &lt; 0.5 ? :</td></tr>
+<tr><td class="h"><a id="L959">959</a></td><td class="c0">50</td><td class="c0">T</td><td class="c3">F</td><td class="s">rand() &lt; 0.5 ? :</td></tr>
 <tr><td class="h"><a id="L976">976</a></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">if ($char eq &#39;(&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char eq &#39;)&#39;) { }</td></tr>
 <tr><td class="h"></td><td class="c3">100</td><td class="c3">T</td><td class="c3">F</td><td class="s">elsif ($char eq &#39;|&#39; and $depth == 0) { }</td></tr>
