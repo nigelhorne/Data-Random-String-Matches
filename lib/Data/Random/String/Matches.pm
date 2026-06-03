@@ -892,7 +892,7 @@ sub _parse_sequence {
 
 sub _handle_quantifier {
 	my ($self, $pattern, $pos, $generator, $check_possessive) = @_;
-	$check_possessive //= 1;  # Default to checking for possessive
+	$check_possessive //= 1;	# Default to checking for possessive
 
 	my $next = substr($pattern, $pos + 1, 1);
 	my $is_possessive = 0;
@@ -1083,7 +1083,7 @@ sub _random_from_class {
 				my $start_ord = ord($char);
 				my $end_ord = ord($end_char);
 				push @chars, map { chr($_) } ($start_ord .. $end_ord);
-				$i += 2;  # Will be incremented again by loop, total +3
+				$i += 2;	# Will be incremented again by loop, total +3
 			} else {
 				# Invalid range order
 				push @chars, $char;
